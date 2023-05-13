@@ -1,21 +1,7 @@
-###
-# GET - Récupérer take articles à partir de la position skip
-###
-
 GET http://localhost:3000/articles?take=5&skip=10
-
-
 ###
-# GET - Récupérer un article ayant l'id donné
-###
-
 GET http://localhost:3000/articles/123456789
-
-
 ###
-# POST - Ajouter un nouveau article envoyé sous format JSON
-###
-
 POST http://localhost:3000/articles
 
 Content-Type: application/json
@@ -24,29 +10,22 @@ Content-Type: application/json
   "titre": "Nouvel article",
   "contenu": "Contenu de l'article",
   "auteur": "John Doe",
-  "date": "2023-05-12"
+  "date": "2023-05-12",
+
 }
 
-
 ###
-# PATCH - Mettre à jour l'article envoyé dans le corps de la requête
-###
-
 PATCH http://localhost:3000/articles
 
 Content-Type: application/json
 
 {
   "id": "123456789",
-  "titre": "Article mis à jour",
+  "title": "Article mis à jour",
   "contenu": "Nouveau contenu de l'article",
   "auteur": "Jane Doe",
-  "date": "2023-05-12"
+  "createdAt": "2023-05-12",
+  "published" : "true"
 }
-
-
-###
-DELETE - Supprimer l'article ayant l'id donné
-###
 
 DELETE http://localhost:3000/articles/123456789

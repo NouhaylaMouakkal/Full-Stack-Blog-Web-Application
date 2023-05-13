@@ -1,0 +1,25 @@
+# GET http://localhost:3000/users
+
+GET http://localhost:3000/users/2
+
+###
+POST http://localhost:3000/users/
+Content-Type: application/json
+
+{
+    "email" : "youness@gmail.com",
+    "password": "masry",
+    "role": "user"
+}
+####
+DELETE  http://localhost:3000/users/3
+
+PATCH  http://localhost:3000/users/
+Content-Type: application/json
+
+{
+    "id" : 1,
+    "email" : "nouhayla@gmail.com",
+    "password": "123456",
+    "role": "admin"
+}

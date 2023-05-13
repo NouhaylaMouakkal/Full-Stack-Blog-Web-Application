@@ -1,0 +1,45 @@
+body {
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+body.dark {
+  background-color: #222;
+  color: #fff;
+}
+body.light {
+  background-color: #fff;
+  color: #222;
+}
+.page_mode{
+  border-color: beige;
+  color: aliceblue;
+  background-color: transparent;
+  width: 70px;
+  border-radius: 25%;
+}
+.bi{
+color: whitesmoke;
+padding-left: 15px;
+}
+.bi:hover{
+  cursor: pointer;
+}
+img.logo{
+width: 70px;
+height: 70px;
+}
+/* @media (min-width: 992px) {
+  /* only apply styles for screens larger than 992px */
+
+  .navbar-nav {
+    display: flex; /* use flexbox layout */
+    align-items: center; /* vertically center items */
+  }
+
+  .dropdown-toggle {
+    margin-left: auto; /* move the element to the right */
+  }
+} */
+footer{
+  text-align: center;
+  color: grey;
+}
