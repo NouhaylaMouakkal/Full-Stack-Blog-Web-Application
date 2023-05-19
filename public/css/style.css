@@ -1,5 +1,6 @@
 body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background: linear-gradient(to right, transparent, rgb(178, 218, 236)),url("critters.png");
 }
 body.dark {
   background-color: #222;
@@ -27,19 +28,158 @@ img.logo{
 width: 70px;
 height: 70px;
 }
-/* @media (min-width: 992px) {
-  /* only apply styles for screens larger than 992px */
-
   .navbar-nav {
     display: flex; /* use flexbox layout */
     align-items: center; /* vertically center items */
   }
-
   .dropdown-toggle {
     margin-left: auto; /* move the element to the right */
-  }
-} */
+  } 
 footer{
   text-align: center;
   color: grey;
+}
+
+
+/*    ======================      ARTICLES ===========================      */
+.parent-of-articles {
+display: flex;
+flex-wrap: wrap;
+justify-content: center;
+}
+article{
+text-align: center;
+border: 0.5px solid rgb(189, 189, 209);
+border-radius: 5px;
+margin: 40px 20px;
+width: 320px;
+/* color: rgb(185, 182, 182); */
+color: rgb(9, 7, 121);
+transition: 0.2s;
+}
+.dark article {
+border: 0.5px solid antiquewhite;
+}
+
+article:hover {
+border: 1px solid rgb(165, 64, 152);
+/* background-color: rgba(219, 236, 255, 0.514); */
+color: rgb(68, 73, 92);
+border-left: 8px solid rgb(109, 45, 90);
+}
+
+.dark article:hover {
+border: 2px solid antiquewhite;
+/* background-color: rgba(219, 236, 255, 0.514); */
+color: rgb(217, 219, 223);
+border-left: 8px solid antiquewhite;
+}
+
+article h2 {
+margin-top: 19px;
+font-size: 24px;
+font-weight: normal;
+color: rgb(85, 72, 72);
+}
+
+.dark article h2 {
+color: #f6fa1d;
+}
+
+article:hover h2 {
+font-weight: 500;
+}
+
+article p {
+line-height: 2;
+font-size: 16px;
+font-weight: normal;
+text-align: left;
+padding: 23px 9px;
+}
+
+.dark article p {
+color: #dad5d5;
+}
+
+.btn {
+font-weight: 700;
+float: right;
+}
+
+.dark .btn {
+color: rgb(187 204 255);
+}
+/*            Adding article                */
+orm{
+width: fit-content;
+margin: auto;
+}
+
+input, label, textarea{
+border-radius: 6px;
+display: block;
+width: 300px;
+height: 35px;
+}
+
+label {
+margin-bottom: 14px;
+margin-top: 50px;
+font-size: 23px;
+font-weight: 400;
+}
+
+input {
+border: 1px solid gray;
+font-size: 20px;
+}
+
+textarea {
+height: 170px !important;
+width: 370px !important;
+font-size: 20px;
+}
+input,textarea{
+opacity: 0.7;
+border-color: black;
+margin-bottom: -30px;
+}
+
+.create {
+all: unset;
+background-color: rgb(255, 62, 62);
+color: #ffffff;
+margin: 28px;
+padding: 3px 10px;
+border-radius: 6px;
+display: block;
+font-size: 25px;
+float: right;
+}
+
+
+.create:hover {
+background-color: rgb(214, 55, 55);
+font-size: 26px;
+}
+
+
+.create:active {
+transform: scale(0.9);
+background-color: tomato;
+}
+/* Center a div  */
+.containerA {
+display: flex;
+justify-content: center;
+align-items: center;
+height: 100vh; /* Adjust as needed */
+}
+
+.center {
+text-align: start;
+}
+sub{
+float: right;
 }

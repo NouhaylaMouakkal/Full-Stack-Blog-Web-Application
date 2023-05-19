@@ -1,31 +1,29 @@
-GET http://localhost:3000/articles?take=5&skip=10
-###
-GET http://localhost:3000/articles/123456789
-###
+GET http://localhost:3000/articles?take=5&skip=10 HTTP/1.1
+### !!
+GET http://localhost:3000/articles/6
+### !!
 POST http://localhost:3000/articles
 
 Content-Type: application/json
 
 {
-  "titre": "Nouvel article",
-  "contenu": "Contenu de l'article",
-  "auteur": "John Doe",
-  "date": "2023-05-12",
-
+    "titre": "Article Test",
+    "contenu": "Ceci est un test",
+    "image": "https://picsum.photos/500/300.jpg?",
+    "createdAt": "2023-05-14T00:00:00.000",
+    "updatedAt": "2023-05-14T00:00:00.000",
+    "published": true,
+    "userId" : 55
 }
-
-###
-PATCH http://localhost:3000/articles
+### !!!
+PATCH http://localhost:3000/articles/6
 
 Content-Type: application/json
 
 {
-  "id": "123456789",
   "title": "Article mis à jour",
   "contenu": "Nouveau contenu de l'article",
-  "auteur": "Jane Doe",
-  "createdAt": "2023-05-12",
-  "published" : "true"
+  "published" : true
 }
-
-DELETE http://localhost:3000/articles/123456789
+### !!
+DELETE http://localhost:3000/articles/6

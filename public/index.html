@@ -12,47 +12,27 @@
     <!-- Include Css File -->
     <link rel="stylesheet" href="css/style.css">
     <!-- Include JQuery -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>  
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js" defer></script>  
     <!-- Include JS File -->
     <script src="js/script.js" defer></script>
+    <!-- Include Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@500&display=swap" rel="stylesheet">
 </head>
-<body id="body">
-  <!-- Navbar -->
-    <!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<body>
+  <div id="page1">
+  <!-- NavBar 1 --> 
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#"><img src="images/Logo.avif" alt="Logo" class="logo"></a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Connexion
-              </a>
-              <ul class="dropdown-menu dropdown-menu-dark">
-                <li><a class="dropdown-item login" href="#login ">Sign in</a></li>
-                <li><a class="dropdown-item signup" href="#signup">Sign up</a></li>
-              </ul>
-            </li>
-          </ul>
-          <span id="changecolor">
-              <i class="bi bi-moon"></i>
-              <i class="bi bi-brightness-high" style="display: none;" ></i>
-          </span>
-        </div>
-      </div>
-    </nav> -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="#"><img src="images/Logo.avif" alt="logo" class="logo"></a>
+        <a class="navbar-brand" href="#HomaPage"><img src="images/Logo.avif" alt="logo" class="logo"></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarColor01">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link active logo" aria-current="page" href="#">Accueil</a>
+              <a class="nav-link active logo" aria-current="page" href="#HomePage">Accueil</a>
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -65,7 +45,7 @@
             </li>
 
             <li class="nav-item">
-              <a class="nav-link" href="#contact">Contact</a>
+              <a class="nav-link contact" href="#contact" >Contact</a>
             </li>
             <li>
               <span id="changecolor">
@@ -82,6 +62,18 @@
         </div>
       </div>
     </nav>
+  <!-- Home Page -->
+  <div id="HomePage">
+    <img style="float: right; width: 400px; height: 400px;" src="images/HomePage.png" alt="HomePageSticker">
+      <h1 style=" margin: 15px;  font-family: 'IBM Plex Sans Arabic', sans-serif;">Blogging's Wrold</h1>
+      <p style="width: 450px; height: 450px; margin: 17px; font-family:serif; font-style: italic;">
+        is a dynamic and engaging web application that connects bloggers from all around the world. 
+        With a sleek and user-friendly interface, 
+        this platform offers a space for individuals to express their thoughts, share their experiences, and connect with a like-minded community. 
+        Whether you're a seasoned blogger or just starting out, "Blogging's World" provides a range of powerful features to enhance your writing, including customizable templates, easy content creation tools, and seamless social media integration.
+        Discover a world of inspiration, engage in meaningful discussions, and unlock your full blogging potential with "Blogging's World.
+      </p>
+    </div>
   <!-- Connexion -->
     <!-- Log in -->
     <div id="login" style="display: none;">
@@ -193,10 +185,76 @@
         </div>
       </section>
     </div>
+  </div>
 
-    <!-- Bottom -->
-<div id="contact" class="card mb-3" style="max-width: 100%; background-color: inherit;">
-  
+
+    <!-- Contact -->
+<div id="page2">
+<div id="contact" class="card mb-3" style="max-width: 100%; background-color: inherit;" >
+       <!-- NAV BAR FOR AUTHOR  -->
+    <nav class="navbar bg-light fixed-top">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Nouhayla Mouakkal</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Nouhayla mkl</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#myarticles">My articles</a>
+              </li>
+              <li class="nav-item">
+                  <a href="#" class="nav-link"><i class="bi bi-box-arrow-right logout"  style="color: black;"></i></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <br><br>
+<!-- Ajout d'un article -->
+<div class="containerA">
+  <section id="newArticle">
+    <h1 style="margin-top: 55px; margin-bottom: -30px;">Create new article</h1>
+    <!-- <sub id="datetime"></sub> -->
+    <form class="center">
+      <label for="title">Article title: </label>
+      <input id="title" type="text">
+      <label for="body">Article body:</label>
+      <textarea id="body"></textarea>
+      <label for="image">Article Image : </label>
+      <input id="image" type="file" accept="image/*">   
+      <br>     
+      <a href="#myarticles"><button class="create" type="submit">Create</button></a>
+    </form>
+  </section>
+</div>
+<!-- Added Articles -->
+ <main id="main">
+  <section>
+      <h1 style="text-align: center;">Trending Articles &#128293;</h1>
+      <div class="parent-of-articles" id="div_parent">
+      </div>
+  </section>
+</main>
+</div>
+</div>
+
+<!-- Articles from database -->
+
+
+
+
+
+
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>  
 </body>
 </html>

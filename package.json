@@ -12,9 +12,25 @@
     "express": "~4.16.1",
     "faker": "^6.6.6",
     "jade": "^1.11.0",
-    "morgan": "~1.9.1"
+    "jose": "^4.14.4",
+    "morgan": "~1.9.1",
+    "mysql": "^2.18.1"
   },
   "devDependencies": {
+    "@faker-js/faker": "^8.0.1",
     "prisma": "^4.14.0"
-  }
+  },
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NouhaylaMouakkal/Projet-Web.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NouhaylaMouakkal/Projet-Web/issues"
+  },
+  "homepage": "https://github.com/NouhaylaMouakkal/Projet-Web#readme",
+  "description": ""
 }

@@ -1,34 +1,76 @@
 const express = require('express');
+const { PrismaClient } = require('@prisma/client');
+const prisma = new PrismaClient();
 const router = express.Router();
-
-// Récupérer take commentaires à partir de la position skip
-router.get('/', (req, res) => {
-  const { take = 0, skip = 0 } = req.query;
-  res.send('Liste des commentaires (take=${take}, skip=${skip})');
+//_____________________________ Functions _______________________________
+function getCommentById(id){
+    return prisma.comment.findUnique({
+        where : {id:+id}
+    })
+}
+function addComment(commentaire){
+    return prisma.comment.create({
+        data : commentaire
+    })
+}
+function updateComment(id,commentaire){
+    return prisma.comment.update({
+        where : {id:+id},
+        data : commentaire
+    })
+}
+function deleteComment(id){
+    return prisma.comment.delete({
+        where : {id:+id}
+    })
+}
+//_____________________________ GET _______________________________
+router.get('/', async (req, res) => {
+    const { take, skip } = req.query;
+    const commentaires = await prisma.commentaire.findMany({ take: +take || 10, skip: +skip || 0 });
+    res.json(commentaires);
 });
-
-// Récupérer une commentaire ayant l'id donné
-router.get('/:id', (req, res) => {
-  const { id } = req.params;
-  res.send(`commentaire avec l'id ${id}`);
+router.get('/:id', async (req, res) => {
+    const { id } = req.params;
+    try {
+        const commentaire = await getCommentById(id);
+        if (!commentaire) return res.status(404).json({ error: 'Comment not found' });
+        res.json(commentaire);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
 });
-
-// Ajouter une nouvelle commentaire envoyée sous format JSON
-router.post('/', (req, res) => {
-  const nouvelleCategorie = req.body;
-  res.send(`commentaire ajoutée avec succès`);
+//_____________________________ POST _______________________________
+router.post('/', async (req, res) => {
+    const newCommentaire = req.body;
+    try {
+        const commentaire = await addComment(newCommentaire);
+        res.json(commentaire);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
 });
+//_____________________________ PATCH _______________________________
+router.patch('/:id', async (req, res) => {
+    const { id } = req.params;
+    const updatedCommentaire = req.body;
 
-// Mettre à jour la commentaire envoyée dans le corps de la requête
-router.patch('/', (req, res) => {
-  const categorieModifiee = req.body;
-  res.send(`commentaire modifiée avec succès`);
+    try {
+        const commentaire = await updateComment(id,updatedCommentaire)
+        res.json(commentaire);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
 });
-
-// Supprimer la commentaire ayant l'id donné
-router.delete('/:id', (req, res) => {
-  const { id } = req.params;
-  res.send(`commentaire avec l'id ${id} supprimée avec succès`);
+//_____________________________ DELETE _______________________________
+router.delete('/:id', async (req, res) => {
+    const { id } = req.params;
+    try {
+        await prisma.commentaire.delete({ where: { id: +id } });
+        res.json({ message: `Commentaire with id ${id} deleted.` });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
 });
 
 module.exports = router;
