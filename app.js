@@ -20,13 +20,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
+app.use(cors());
 app.use('/articles', articlesRouter);
 app.use('/categories', categoriesRouter);
 app.use('/commentaires', commentairesRouter);
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use(cors());
+
 app.use('/countAll',counting);
 // app.use('/auth',authRouter);
 // ***********************************************************

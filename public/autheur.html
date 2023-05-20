@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Interface de l'auteur</title>
+  <style>
+    /* Add some CSS styles for the articles */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f1f1f1;
+      margin: 0;
+      padding: 0;
+    }
+
+    h1 {
+      color: #333;
+      text-align: center;
+      padding: 20px 0;
+    }
+
+    #articles {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    article {
+      background-color: #fff;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      margin: 10px;
+      width: 300px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .articleTitle {
+      font-size: 20px;
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 10px;
+    }
+
+    .articleContent {
+      color: #555;
+      margin-bottom: 15px;
+    }
+
+    .articleImage {
+      width: 100%;
+      height: auto;
+      margin-bottom: 15px;
+    }
+
+    .articleCreatedAt,
+    .articleUpdatedAt,
+    .userID {
+      color: #888;
+      margin-bottom: 5px;
+    }
+    
+    .commentBox {
+      margin-top: auto;
+    }
+  </style>
+</head>
+<body>
+  <h1>Articles de l'auteur</h1>
+  <!-- Section pour afficher les articles -->
+  <section id="articles">
+    <article>
+      <div class="articleTitle">Titre de l'article 1</div>
+      <div class="articleContent">Contenu de l'article 1...</div>
+      <img src="" alt="Image de l'article 1" class="articleImage">
+      <div class="articleCreatedAt">Date de création :</div>
+      <div class="articleUpdatedAt">Date de modification :</div>
+      <div class="userID">ID de l'utilisateur :</div>
+      <div class="commentBox">Zone de commentaire</div>
+    </article>
+
+    <!-- Ajoutez d'autres articles ici -->
+
+  </section>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      var articleURL = "http://localhost:3000/articles/";
+
+      $.ajax({
+        url: articleURL,
+        method: 'GET',
+        success: function(data) {
+          $("#articles").empty(); // Clear existing articles
+
+          data.forEach(function(article) {
+            var articleHTML = '<article>' +
+              '<div class="articleTitle">' + article.title + '</div>' +
+              '<div class="articleContent">' + article.contenu + '</div>' +
+              '<img src="' + article.image + '" alt="Image de l\'article" class="articleImage">' +
+              '<div class="articleCreatedAt">Date de création: ' + article.createdAt + '</div>' +
+              '<div class="articleUpdatedAt">Date de modification: ' + article.updatedAt + '</div>' +
+              '<div class="userID">ID de l\'utilisateur: ' + article.userId + '</div>' +
+              '<div class="commentBox">Zone de commentaire</div>' +
+              '</article>';
+
+            $("#articles").append(articleHTML);
+          });
+        },
+       
+
+ error: function() {
+          $('#articles').text("Erreur lors du chargement des articles");
+        }
+      });
+    });
+  </script>
+</body>
+</html>

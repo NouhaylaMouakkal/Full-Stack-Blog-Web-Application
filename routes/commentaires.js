@@ -10,13 +10,23 @@ function getCommentById(id){
 }
 function addComment(commentaire){
     return prisma.comment.create({
-        data : commentaire
+        data : {
+            email:commentaire.email,
+            contenu:commentaire.contenu,
+            articleId: commentaire.articleId,
+            userId : commentaire.userId
+        }
     })
 }
 function updateComment(id,commentaire){
     return prisma.comment.update({
         where : {id:+id},
-        data : commentaire
+        data : {
+            email:commentaire.email,
+            contenu:commentaire.contenu,
+            articleId: commentaire.articleId,
+            userId : commentaire.userId
+        }
     })
 }
 function deleteComment(id){
@@ -27,7 +37,7 @@ function deleteComment(id){
 //_____________________________ GET _______________________________
 router.get('/', async (req, res) => {
     const { take, skip } = req.query;
-    const commentaires = await prisma.commentaire.findMany({ take: +take || 10, skip: +skip || 0 });
+    const commentaires = await prisma.comment.findMany({ take: +take || 10, skip: +skip || 0 });
     res.json(commentaires);
 });
 router.get('/:id', async (req, res) => {
@@ -66,7 +76,7 @@ router.patch('/:id', async (req, res) => {
 router.delete('/:id', async (req, res) => {
     const { id } = req.params;
     try {
-        await prisma.commentaire.delete({ where: { id: +id } });
+        await deleteComment(id);
         res.json({ message: `Commentaire with id ${id} deleted.` });
     } catch (error) {
         res.status(500).json({ error: error.message });

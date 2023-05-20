@@ -21,13 +21,17 @@ function getCountOfArticlesByCategory(id) {
   }
 function addCategory(categorie){
     return prisma.category.create({
-        data : categorie
+        data :{
+            nom : categorie.nom
+        }
     })
 }
 function updateCategory(id,categorie){
     return prisma.category.update({
         where : {id:+id},
-        data : categorie
+        data :{
+            nom : categorie.nom
+        }
     })
 }
 function deleteCategory(id){
@@ -38,13 +42,13 @@ function deleteCategory(id){
 //_____________________________ GET _______________________________
 router.get('/', async (req, res) => {
     const { take, skip } = req.query;
-    const categories = await prisma.categorie.findMany({ take: +take || 10, skip: +skip || 0 });
-    res.json(categories);
+    const articles = await prisma.category.findMany({ take: +take || 10, skip: +skip || 0 });
+    res.json(articles);
 });
 router.get('/:id', async (req, res) => {
     const { id } = req.params;
     try {
-        const categorie = await getCategoryById();
+        const categorie = await getCategoryById(id);
         if (!categorie) return res.status(404).json({ error: 'Category not found' });
 
         res.json(categorie);
@@ -90,7 +94,6 @@ router.get('/:id/articles/count', async (req, res) => {
 //_____________________________ POST _______________________________
 router.post('/', async (req, res) => {
   const newCategorie = req.body;
-//   const user = await prisma.utilisateur.findUnique({ where: { id: newCategorie.utilisateurId } });
   try {
       const categorie = await addCategory(newCategorie);
       res.json(categorie);
@@ -102,9 +105,8 @@ router.post('/', async (req, res) => {
 router.patch('/:id', async (req, res) => {
     const { id } = req.params;
     const updatedCategorie = req.body;
-
     try {
-        const categorie = await updateCategory(id,updateCategory)
+        const categorie = await updateCategory(id,updatedCategorie)
         res.json(categorie);
     } catch (error) {
         res.status(500).json({ error: error.message });

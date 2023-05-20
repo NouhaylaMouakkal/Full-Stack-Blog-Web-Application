@@ -1,18 +1,51 @@
 ###
-GET http://localhost:3000/categories?take=10&skip=0
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+GET http://localhost:3000/categories?take=5&skip=0
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ### Get category by id
-GET http://localhost:3000/categories/48
+GET http://localhost:3000/categories/56
+
+
 ###
 ### Create new category
 POST http://localhost:3000/categories
 Content-Type: application/json
 
 {
-    "nom": "New category added"
+    "nom": "New category added in db"
 }
 
 ### Update category 
-PATCH http://localhost:3000/categories/48
+PATCH http://localhost:3000/categories/57
 Content-Type: application/json
 
 {
@@ -20,4 +53,4 @@ Content-Type: application/json
 }
 
 ### Delete category
-DELETE http://localhost:3000/categories/50
+DELETE http://localhost:3000/categories/57

@@ -1,29 +1,33 @@
-GET http://localhost:3000/articles?take=5&skip=10 HTTP/1.1
-### !!
-GET http://localhost:3000/articles/6
+GET http://localhost:3000/articles?take=2&skip=0 HTTP/1.1
+### 
+GET http://localhost:3000/articles/56/user
 ### !!
 POST http://localhost:3000/articles
 
 Content-Type: application/json
 
 {
-    "titre": "Article Test",
+    "title": "Article Test",
     "contenu": "Ceci est un test",
     "image": "https://picsum.photos/500/300.jpg?",
     "createdAt": "2023-05-14T00:00:00.000",
     "updatedAt": "2023-05-14T00:00:00.000",
     "published": true,
-    "userId" : 55
+    "userId" : 57
 }
-### !!!
-PATCH http://localhost:3000/articles/6
+### !!
+PATCH http://localhost:3000/articles/103
 
 Content-Type: application/json
 
 {
   "title": "Article mis à jour",
   "contenu": "Nouveau contenu de l'article",
-  "published" : true
+  "image": "https://loremflickr.com/640/480?lock=1314580215103488",
+  "createdAt": "2020-03-26T17:37:33.386Z",
+  "updatedAt": "2023-05-18T12:05:05.023Z",
+  "published": true,
+  "userId": 56
 }
-### !!
+### 
 DELETE http://localhost:3000/articles/6

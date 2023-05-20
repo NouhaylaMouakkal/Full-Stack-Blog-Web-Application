@@ -2,26 +2,25 @@
 GET http://localhost:3000/users?take=15&skip=0
 ###
 GET http://localhost:3000/users/66
-
 ###
 POST http://localhost:3000/users/
 Content-Type: application/json
 
 {
     "nom" : "Youness",
-    "email" : "youness@gmail.com",
+    "email" : "younessMsr@gmail.com",
     "password": "ensam",
     "role": "AUTHOR"
 }
-####
-DELETE  http://localhost:3000/users/68
 ###
 PATCH  http://localhost:3000/users/66
 Content-Type: application/json
 
 {
-    "nom": "nouhayla",
+    "nom": "nouhayla mouakkal",
     "email" : "nouhayla@gmail.com",
-    "password": "123456",
+    "password": "2003",
     "role": "ADMIN"
 }
+####
+DELETE  http://localhost:3000/users/69

@@ -16,24 +16,27 @@ function getCommentCount(id){
 }
 function addArticle(newArticle){
 return prisma.article.create({
-    data : newArticle
-})
-}
-function updateArticle(id,upArticle){
+        data: {
+            title: newArticle.title,
+            contenu: newArticle.contenu,
+            published: newArticle.published,
+            author: { connect: { id: newArticle.userId } }
+          }
+})}
+function updateArticle(id, upArticle) {
     return prisma.article.update({
-        where :{id:+id},
-        data :upArticle
-    })
-}
-function deleteArticle(id){
-    return prisma.article.delete({
-        where : {id:+id}
-    })
-}
+      where: { id: +id },
+      data: {
+        title: upArticle.title,
+        contenu: upArticle.contenu,
+        published: upArticle.published
+      }
+    });
+  }
 //_____________________________ GET _______________________________
 router.get('/', async (req, res) => {
     const { take, skip } = req.query;
-    const articles = await prisma.article.findMany({ take: +take || 10, skip: +skip || 0 });
+    const articles = await prisma.article.findMany({ take: +take || 5, skip: +skip || 0 });
     res.json(articles);
 });
 router.get('/:id', async (req, res) => {
@@ -47,7 +50,7 @@ router.get('/:id', async (req, res) => {
     }
 });
 //récupérer le nombre de commentaires associés à un article
-router.get('/:id/comments/count', async (req, res) => {
+router.get('/:id/commentaires/count', async (req, res) => {
     const { id } = req.params;
     try {
       const count = await getCommentCount(id);
@@ -56,41 +59,61 @@ router.get('/:id/comments/count', async (req, res) => {
       res.status(500).json({ error: error.message });
     }
   });
+  router.get('/countArticles', async (req, res) => {
+    try {
+      const countAllArticles = await prisma.article.count();
+      res.json({ countAllArticles });
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  });
+  
+  router.get('/:id/user', async (req, res) => {
+    const { id } = req.params;
+    try {
+      const userArticle = await prisma.article.findMany({where : {userId:+id}});
+      res.json({ userArticle });
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  });
 //_____________________________ POST _______________________________
 router.post('/', async (req, res) => {
-  const newArticle = req.body;
-  const user = await getArticleById(newArticle.userId);
-  if (!user) {
-      return res.status(400).json({ error: `No user found with id ${newArticle.userId}` });
-  }
-  try {
-      const article = await addArticle(newArticle);
-      res.json(article);
-  } catch (error) {
-      res.status(500).json({ error: error.message });
-  }
-});
+    const newArticle = req.body;
+    try {
+        const article = await addArticle(newArticle);
+        res.json(article);
+      } catch (error) {
+        res.status(500).json({ error: error.message });
+      }
+  });
 //_____________________________ PATCH _______________________________
+
 router.patch('/:id', async (req, res) => {
     const { id } = req.params;
     const updatedArticle = req.body;
-
+  
     try {
-        const article = await updateArticle(id,updatedArticle);
-        res.json(article);
+      const article = await updateArticle(id,updatedArticle)
+      res.json(article);
     } catch (error) {
-        res.status(500).json({ error: error.message });
+      res.status(500).json({ error: error.message });
     }
-});
+  });
 //_____________________________ DELETE _______________________________
 router.delete('/:id', async (req, res) => {
     const { id } = req.params;
     try {
-        await deleteArticle(id);
-        res.json({ message: `Article with id ${id} deleted.` });
+      // Delete related records first
+      await prisma.comment.deleteMany({ where: { articleId: +id } });
+  
+      // Delete the article
+      await prisma.article.delete({ where: { id: +id } });
+  
+      res.json({ message: `Article with id ${id} deleted.` });
     } catch (error) {
-        res.status(500).json({ error: error.message });
+      res.status(500).json({ error: error.message });
     }
-});
-
+  });
+  
 module.exports = router;
