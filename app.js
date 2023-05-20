@@ -12,6 +12,8 @@ const categoriesRouter = require('./routes/categories.js');
 const commentairesRouter = require('./routes/commentaires.js');
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
+const counting = require('./routes/dashboard.js');
+const cors = require('cors');
 // const authRouter = require('./routes/authRouter')
 app.use(logger('dev'));
 app.use(express.json());
@@ -24,6 +26,8 @@ app.use('/categories', categoriesRouter);
 app.use('/commentaires', commentairesRouter);
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use(cors());
+app.use('/countAll',counting);
 // app.use('/auth',authRouter);
 // ***********************************************************
 
