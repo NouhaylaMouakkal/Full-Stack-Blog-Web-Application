@@ -65,8 +65,8 @@
   <!-- Home Page -->
   <div id="HomePage">
     <img style="float: right; width: 400px; height: 400px;" src="images/HomePage.png" alt="HomePageSticker">
-      <h1 style=" margin: 15px;  font-family: 'IBM Plex Sans Arabic', sans-serif;">Blogging's Wrold</h1>
-      <p style="width: 450px; height: 450px; margin: 17px; font-family:serif; font-style: italic;">
+      <h1 style=" margin: 15px;  font-family: 'IBM Plex Sans Arabic', sans-serif;">Blogging's World</h1>
+      <p style="width: 320px; height: 450px; margin: 17px; font-family:serif; font-style: italic;">
         is a dynamic and engaging web application that connects bloggers from all around the world. 
         With a sleek and user-friendly interface, 
         this platform offers a space for individuals to express their thoughts, share their experiences, and connect with a like-minded community. 
@@ -111,7 +111,7 @@
                           </div>
         
                           <div class="pt-1 mb-4">
-                            <button class="btn btn-dark btn-lg btn-block" type="submit" >Login</button>
+                            <button class="btn btn-dark btn-lg btn-block login_btn" type="submit" >Login</button>
                           </div>
         
                           <a class="small text-muted" href="#!">Forgot password?</a>
@@ -145,7 +145,7 @@
                   <div class="col-md-6 col-lg-7 d-flex align-items-center">
                     <div class="card-body p-4 p-lg-5 text-black" style="height: 610px;">
       <!-- Formulaire -->
-                      <form method="post" id="signup_form">
+                      <form method="post" id="signup_form" action="http://localhost:3000/users/">
       
                         <div class="d-flex align-items-center mb-3 pb-1">
                           <i class="fas fa-cubes fa-2x me-3" style="color: #ff6219;"></i>
@@ -187,65 +187,15 @@
     </div>
   </div>
 
-
     <!-- Contact -->
 <div id="page2">
-<div id="contact" class="card mb-3" style="max-width: 100%; background-color: inherit;" >
-       <!-- NAV BAR FOR AUTHOR  -->
-    <nav class="navbar bg-light fixed-top">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="#">Nouhayla Mouakkal</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-          <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Nouhayla mkl</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-          </div>
-          <div class="offcanvas-body">
-            <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#myarticles">My articles</a>
-              </li>
-              <li class="nav-item">
-                  <a href="#" class="nav-link"><i class="bi bi-box-arrow-right logout"  style="color: black;"></i></a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </nav>
-    <br><br>
-<!-- Ajout d'un article -->
-<div class="containerA">
-  <section id="newArticle">
-    <h1 style="margin-top: 55px; margin-bottom: -30px;">Create new article</h1>
-    <!-- <sub id="datetime"></sub> -->
-    <form class="center">
-      <label for="title">Article title: </label>
-      <input id="title" type="text">
-      <label for="body">Article body:</label>
-      <textarea id="body"></textarea>
-      <label for="image">Article Image : </label>
-      <input id="image" type="file" accept="image/*">   
-      <br>     
-      <a href="#myarticles"><button class="create" type="submit">Create</button></a>
-    </form>
-  </section>
-</div>
-<!-- Added Articles -->
- <main id="main">
-  <section>
-      <h1 style="text-align: center;">Trending Articles &#128293;</h1>
-      <div class="parent-of-articles" id="div_parent">
-      </div>
-  </section>
-</main>
-</div>
+  <h1 class="stat">Statistiques</h1>
+    <div id="statistics">
+        <div class="statistic-item" id="articleCount">Chargement du nombre d'articles...</div>
+        <div class="statistic-item" id="userCount">Chargement du nombre d'utilisateurs...</div>
+        <div class="statistic-item" id="commentCount">Chargement du nombre de commentaires...</div>
+        <div class="statistic-item" id="categoryCount">Chargement du nombre de catégories...</div>
+    </div>
 </div>
 
 <!-- Articles from database -->

@@ -5,13 +5,16 @@ $(document).ready(function(){
 $(document).ready(function() {
   $("a.login").click(function() {
     $("div#signup").hide();
+    $("div#HomePage").hide();
     $("div#login").show();
+
   });
 });
 // Display signup
 $(document).ready(function() {
   $("a.signup").click(function() {
     $("div#login").hide();
+    $("div#HomePage").hide();
     $("div#signup").show();
   });
 });
@@ -50,37 +53,72 @@ $(document).ready(function(){
     $("div#page1").show();
   })
 })
-//******************************** NEW ARTICLES ************************************ */
-const add_article = document.querySelector(".containerA");
-const createButton = document.querySelector(".create");
-
-add_article.addEventListener("submit", (event) => {
-  event.preventDefault();
-  const title = document.getElementById("title").value;
-  let content = document.getElementById("body").value;
-  const image = document.getElementById("image").value;
-  const createdAt = new Date();
-// Limiter le contenu à deux lignes
-let truncatedContent = content;
-const lines = content.split("\n");
-if (lines.length > 2) {
-  truncatedContent = lines.slice(0, 2).join("\n");
-}
-// Afficher le nouvel article sur le profil
-document.getElementById("div_parent").innerHTML += `
-<article>
-<h2>${title}</h2>
-<p>
-  ${content}
-  <br>
-</p>
-</article>`;
+//sign up
+$(document).ready(function() {
+  $("#signup_form").submit(function(event) {
+    event.preventDefault(); 
+    var nom = $("#nom_signup").val();
+    var email = $("#email_signup").val();
+    var password = $("#password_signup").val();
+    // Création de l'objet de données JSON à envoyer
+    var utilisateur = {
+      nom: nom,
+      email: email,
+      password: password,
+      role: "AUTHOR"
+    };
+    // Envoi de la requête POST avec les données JSON
+    $.ajax({
+      url: "http://localhost:3000/users",
+      type: "POST",
+      contentType: "application/json",
+      data: JSON.stringify(utilisateur),
+      success: function(response) {
+        console.log("Utilisateur ajouté avec succès :", response);
+      },
+      error: function(xhr, status, error) {
+        console.error("Erreur lors de l'ajout de l'utilisateur :", error);
+      }
+    });
+  });
 });
+//Login
+document.getElementById("login_form").addEventListener("submit", function(event) {
+  event.preventDefault(); // Empêche la soumission du formulaire
 
+  // Récupération des valeurs des champs du formulaire
+  const email_lf = document.querySelector("input[name='email']").value;
+  const password_lf = document.querySelector("input[name='password']").value;
+
+  // Envoi de la requête GET pour vérifier l'existence de l'e-mail dans la base de données
+  fetch("http://localhost:3000/login/" + email_lf)
+    .then(response => response.json())
+    .then(data => {
+      if (data) {
+        // L'e-mail existe dans la base de données, vérifier le mot de passe
+        if (data.password === password_lf) {
+          // Les informations d'identification sont correctes, redirection vers la page "author.html"
+            if(data.role ==="AUTHOR"){
+              window.location.href = "autheur.html";
+            }
+            else if(data.role ==="ADMIN")
+              window.location.href="admin.html"
+        } else {
+          // Mot de passe incorrect, afficher un message d'erreur
+          alert("Mot de passe incorrect");
+        }
+      } else {
+        // L'e-mail n'existe pas dans la base de données, afficher un message d'erreur
+        alert("E-mail invalide");
+      }
+    })
+    .catch(error => {
+      console.error("Erreur lors de la vérification des informations d'identification :", error);
+    });
+});
 // Changing the mode from light to dark or vice versa
 const button = document.getElementById('changecolor');
 const body = document.body;
-
 button.addEventListener('click', () => {
   if (body.classList.contains('dark')) {
     body.classList.remove('dark');
@@ -104,25 +142,27 @@ changecolor.addEventListener("click", () => {
     lightIcon.style.display = "none";
   }
 });
-// Redirection vers la page ADMIN
-document.getElementById("login_form").addEventListener("submit", function(event) {
-  event.preventDefault(); // Prevent form submission
-  const email_lf = document.querySelector("input[name='email']").value;
-  const password_lf = document.querySelector("input[name='password']").value;
-  if(email_lf==="nouhayla@gmail.com" && password_lf==="2003")
-    window.location.href = "admin.html";
-  else
-    alert("Vous n'etes pas admin");
-});
-// Getting data of signup
-const sf = document.querySelector("#signup_form");
-sf.addEventListener("submit", (event) => {
-  event.preventDefault();
-  const name_sf = document.querySelector("input[name='name']").value;
-  const email_sf = document.querySelector("input[name='email_s']").value;
-  const password_sf = document.querySelector("input[name='password_s']").value;
 
-  console.log("Name: " + name_sf);
-  console.log("Email: " + email_sf);
-  console.log("Password: " + password_sf);
+
+// ADMIN SIDE 
+// Utilisez l'URL appropriée pour récupérer les statistiques depuis votre backend
+var statisticsURL = "http://localhost:3000/countAll/";
+    
+$(document).ready(function() {
+    // Effectuer une requête AJAX pour récupérer les statistiques
+    $.ajax({
+        url: statisticsURL,
+        method: "GET",
+        success: function(data) {
+            // Mettre à jour les valeurs affichées avec les données reçues
+            $("#articleCount").html('<h3>Articles</h3><h4 class="display-4"><i class="bi bi-newspaper stat_icon"></i> ' + data.AllArticles + '</h4>');
+            $("#userCount").html('<h3>Users</h3><h4 class="display-4"><i class="bi bi-people stat_icon"></i> ' + data.AllUsers + '</h4>');
+            $("#commentCount").html('<h3>Comments</h3><h4 class="display-4"><i class="bi bi-chat-dots stat_icon"></i> ' + data.AllComments + '</h4>');
+            $("#categoryCount").html('<h3>Categories</h3><h4 class="display-4"><i class="bi bi-grid stat_icon"></i> ' + data.AllCategories + '</h4>');
+        },
+        error: function() {
+            // Gérer les erreurs de récupération des statistiques
+            $("#statistics").text("Erreur lors du chargement des statistiques");
+        }
+    });
 });

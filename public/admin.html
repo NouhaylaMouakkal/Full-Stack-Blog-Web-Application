@@ -12,7 +12,7 @@
             padding: 20px;
         }
 
-        h1 {
+        .stat {
             color: #007bff;
             margin-bottom: 30px;
         }
@@ -48,33 +48,148 @@
             font-size: 36px;
             margin-bottom: 10px;
         }
+
+    .statistic-item:hover{
+  width: 220px;
+  cursor: pointer;
+  box-shadow: #070707;
+  box-sizing: border-box;
+  background-color: #aec9e6;
+}  
+/* Articles style */
+#articles , #users ,#categories,#comments {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    article {
+      background-color: #fff;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      margin: 10px;
+      width: 300px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    article:hover {
+      border: 1px solid rgb(165, 64, 152);
+      color: rgb(68, 73, 92);
+      border-left: 8px solid rgb(109, 45, 90);
+    }
+    .articleTitle {
+      font-size: 20px;
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 10px;
+    }
+
+    .articleContent {
+      color: #555;
+      margin-bottom: 15px;
+    }
+
+    .articleImage {
+      width: 100%;
+      height: auto;
+      margin-bottom: 15px;
+    }
+
+    .articleCreatedAt,
+    .articleUpdatedAt,
+    .userID{
+      color: #888;
+      margin-bottom: 5px;
+    }
+ 
     </style>
 </head>
 <body>
-    <h1>Statistiques</h1>
+    <h1 class="stat">Statistiques</h1>
     <div id="statistics">
         <div class="statistic-item" id="articleCount">Chargement du nombre d'articles...</div>
         <div class="statistic-item" id="userCount">Chargement du nombre d'utilisateurs...</div>
         <div class="statistic-item" id="commentCount">Chargement du nombre de commentaires...</div>
         <div class="statistic-item" id="categoryCount">Chargement du nombre de catégories...</div>
     </div>
+    <!-- Articles  -->
+    
+        <div id="articles">
+  <div id="ApplyModification1">
+        <i class="bi bi-file-earmark-plus-fill" id="addArticle"></i>
+        <i class="bi bi-pencil" id="editArticle"></i>
+        <i class="bi bi-trash" id="removeArticle"></i>
+        <i class="bi bi-search" id="searcharticle"></i>
+          </div>
+    </div>
+    <!-- Users -->
+    <div id="users">
+        <div id="ApplyModification2">
+            <i class="bi bi-file-earmark-plus-fill" id="adduser"></i>
+            <i class="bi bi-pencil" id="edituser"></i>
+            <i class="bi bi-trash" id="removeuser"></i>
+            <i class="bi bi-search" id="searchuser"></i>
 
+        </div>
+    </div>
+    <!-- Commentaires -->
+    <div id="comments">
+        <div id="ApplyModification3">
+            <i class="bi bi-file-earmark-plus-fill" id="addcomment"></i>
+            <i class="bi bi-pencil" id="editcomment"></i>
+            <i class="bi bi-trash" id="removecomment"></i>
+            <i class="bi bi-search" id="searchcomment"></i>
+
+        </div>
+    </div>
+    
+
+    <!-- Categories -->
+    <div id="categories">
+        <div id="ApplyModification4">
+            <i class="bi bi-file-earmark-plus-fill" id="addcategory"></i>
+            <i class="bi bi-pencil" id="editcategory"></i>
+            <i class="bi bi-trash" id="removecategory"></i>
+            <i class="bi bi-search" id="searchcategory"></i>
+
+            <br><br>
+        </div>
+    </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         // Utilisez l'URL appropriée pour récupérer les statistiques depuis votre backend
-        var statisticsURL = "http://localhost:3000/countAll/";
-    
+        var nbr_articles;
+        var nbr_users ;
+        var nbr_comments ;
+        var nbr_categories;
+//Default dispaly of icons
+$(document).ready(function(){
+    $("#ApplyModification1").hide();
+    $("#ApplyModification2").hide();
+    $("#ApplyModification3").hide();
+    $("#ApplyModification4").hide();
+})
+    // statistics
         $(document).ready(function() {
+            var statisticsURL = "http://localhost:3000/countAll/";
             // Effectuer une requête AJAX pour récupérer les statistiques
             $.ajax({
                 url: statisticsURL,
                 method: "GET",
                 success: function(data) {
                     // Mettre à jour les valeurs affichées avec les données reçues
-                    $("#articleCount").html('<h3>Articles</h3><h4 class="display-4"><i class="bi bi-newspaper"></i> ' + data.AllArticles + '</h4>');
-                    $("#userCount").html('<h3>Users</h3><h4 class="display-4"><i class="bi bi-people"></i> ' + data.AllUsers + '</h4>');
-                    $("#commentCount").html('<h3>Comments</h3><h4 class="display-4"><i class="bi bi-chat-dots"></i> ' + data.AllComments + '</h4>');
-                    $("#categoryCount").html('<h3>Categories</h3><h4 class="display-4"><i class="bi bi-grid"></i> ' + data.AllCategories + '</h4>');
+                    $("#articleCount").html('<h3>Articles</h3><h4 class="display-4"><i class="bi bi-newspaper stat_icon"></i> ' + data.AllArticles + '</h4>');
+                    $("#userCount").html('<h3>Users</h3><h4 class="display-4"><i class="bi bi-people stat_icon"></i> ' + data.AllUsers + '</h4>');
+                    $("#commentCount").html('<h3>Comments</h3><h4 class="display-4"><i class="bi bi-chat-dots stat_icon"></i> ' + data.AllComments + '</h4>');
+                    $("#categoryCount").html('<h3>Categories</h3><h4 class="display-4"><i class="bi bi-grid stat_icon"></i> ' + data.AllCategories + '</h4>');
+                 nbr_articles= data.AllArticles;
+                 nbr_users = data.AllUsers;
+                 nbr_comments = data.AllComments;
+                 nbr_categories = data.AllCategories;
                 },
                 error: function() {
                     // Gérer les erreurs de récupération des statistiques
@@ -82,7 +197,971 @@
                 }
             });
         });
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+// ========== Articles ==========
+//Suppression
+    $(document).ready(function(){
+  $("#removeArticle").click(function(){
+    var inputA = $("<input>", {
+      type: 'number',
+      id: 'idA',
+      placeholder: 'Id of article'
+    });
+
+    var btn = $("<button>", {
+      type: 'submit',
+      id: 'data',
+      text: 'apply'
+    });
+
+    $("#ApplyModification1").append(inputA);
+    $("#ApplyModification1").append(btn);
+
+    $("#data").click(function(){
+      var delURL = "http://localhost:3000/articles/" + $("#idA").val();
+      $.ajax({
+        url: delURL,
+        method: "DELETE",
+        success: function(){
+          console.log('done');
+          location.reload();
+        },
+        error: function(){
+          alert('error');
+        }
+      });
+    });
+  });
+});
+
+//Recherche 
+$("#searcharticle").click(function(){
+  var inputA = $("<input>", {
+    type: 'number',
+    id: 'idA',
+    placeholder: 'Id of article'
+  });
+
+  var btn = $("<button>", {
+    type: 'submit',
+    id: 'data1',
+    text: 'search'
+  });
+
+  $("#ApplyModification1").append(inputA);
+  $("#ApplyModification1").append(btn);
+
+  $("#data1").click(function(){
+    var searchURL ="http://localhost:3000/articles/"+$("#idA").val();
+;
+    $.ajax({
+      url: searchURL,
+      method: "GET",
+      success: function(response){
+        $("#articles").empty();
+        var articleHTML = '<article>' +
+          '<div class="articleId">' + response.id + '</div>' +
+          '<div class="articleTitle">' + response.title + '</div>' +
+          '<div class="articleContent">' + response.contenu + '</div>' +
+          '<img src="' + response.image + '" alt="Image de l\'article" class="articleImage">' +
+          '<div class="articleCreatedAt"><strong>Date de création: </strong>' + response.createdAt + '</div>' +
+          '<div class="articleUpdatedAt"><strong>Date de modification: </strong>' + response.updatedAt + '</div>' +
+          '<div class="userID"><strong>ID de l\'utilisateur: </strong>' + response.userId + '</div>' +
+          '</article>';
+
+        $("#articles").append(articleHTML);
+      },
+      error: function(){
+        alert('error !');
+      }
+    });
+  });
+});
+//Insertion 
+$("#adduser").click(function() {
+  var title_a = $("<input>", {
+    type: 'text',
+    id: 'titreU',
+    placeholder: 'Titre',
+  });
+  var content_a = $("<input>", {
+    type: 'text',
+    id: 'emailU',
+    placeholder: 'user email',
+  });
+  var password_a = $("<input>", {
+    type: 'password',
+    id: 'passwsU',
+    placeholder: 'password',
+  });
+  var role_u = $("<select>", {
+    name: "role",
+    id: "role"
+  }).append(
+    $("<option>", {
+      value: "AUTHOR",
+      text: "AUTHOR"
+    }),
+    $("<option>", {
+      value: "ADMIN",
+      text: "ADMIN"
+    })
+  );
+  var btn_u = $("<button>", {
+    type: 'submit',
+    id: 'data1',
+    text: 'add'
+  });
+  var user = {
+    nom: nom_u.val(),
+    email: email_u.val(),
+    password: password_u.val(),
+    role: role_u.val()
+  };
+  $("#ApplyModification1").append(nom_u);
+  $("#ApplyModification1").append(email_u);
+  $("#ApplyModification1").append(password_u);
+  $("#ApplyModification1").append(role_u);
+  $("#ApplyModification1").append(btn_u);
+
+  $("#data1").click(function() {
+    user = {
+      nom: nom_u.val(),
+      email: email_u.val(),
+      password: password_u.val(),
+      role: role_u.val()
+    };
+
+    $.ajax({
+      url: "http://localhost:3000/articles",
+      type: 'POST',
+      contentType: "application/json",
+      data: JSON.stringify(user),
+      success: function(response) {
+        console.log("Article added successfully:", response);
+        location.reload();
+      },
+      error: function(xhr, status, error) {
+        console.error("Error while adding the article:", error);
+      }
+    });
+  });
+});
+ 
+//Modification 
+    $("#edituser").click(function() {
+    var id_u = $("<input>", {
+    type: 'number',
+    id: 'idU',
+    placeholder: 'id of user',
+  });
+  var nom_u = $("<input>", {
+    type: 'text',
+    id: 'nameU',
+    placeholder: 'Username',
+  });
+  var email_u = $("<input>", {
+    type: 'email',
+    id: 'emailU',
+    placeholder: 'user email',
+  });
+  var password_u = $("<input>", {
+    type: 'password',
+    id: 'passwsU',
+    placeholder: 'password',
+  });
+  var role_u = $("<select>", {
+    name: "role",
+    id: "role"
+  }).append(
+    $("<option>", {
+      value: "AUTHOR",
+      text: "AUTHOR"
+    }),
+    $("<option>", {
+      value: "ADMIN",
+      text: "ADMIN"
+    })
+  );
+  var btn_u = $("<button>", {
+    type: 'submit',
+    id: 'dataU',
+    text: 'add'
+  });
+  var user = {
+    nom: nom_u.val(),
+    email: email_u.val(),
+    password: password_u.val(),
+    role: role_u.val()
+  };
+  $("#ApplyModification2").append(id_u);
+  $("#ApplyModification2").append(nom_u);
+  $("#ApplyModification2").append(email_u);
+  $("#ApplyModification2").append(password_u);
+  $("#ApplyModification2").append(role_u);
+  $("#ApplyModification2").append(btn_u);
+
+  $("#dataU").click(function() {
+    user = {
+      nom: nom_u.val(),
+      email: email_u.val(),
+      password: password_u.val(),
+      role: role_u.val()
+    };
+
+    $.ajax({
+      url: "http://localhost:3000/users/"+id_u.val(),
+      type: 'PATCH',
+      contentType: "application/json",
+      data: JSON.stringify(user),
+      success: function(response) {
+        console.log("User added successfully:", response);
+        location.reload();
+      },
+      error: function(xhr, status, error) {
+        console.error("Error while adding the user:", error);
+      }
+    });
+  });
+});
+
+
+//Affichage
+    $(document).ready(function() {
+      $("#articleCount").click(function() {
+        
+        $("#users").hide();
+        $("#comments").hide();
+        $("#categories").hide();
+        $("#articles").show();
+        $("#ApplyModification1").show();
+
+      var articleURL = "http://localhost:3000/articles/?take=" + nbr_articles + "&skip=0";
+      $.ajax({
+    url: articleURL,
+    method: 'GET',
+    success: function(data) {
+    //   $("#articles").empty(); // Clear existing articles
+
+      data.forEach(function(article) {
+        var articleHTML = '<article>' +
+        '<div class="articleTitle">' + article.id + '</div>' +
+          '<div class="articleTitle">' + article.title + '</div>' +
+          '<div class="articleContent">' + article.contenu + '</div>' +
+          '<img src="' + article.image + '" alt="Image de l\'article" class="articleImage">' +
+          '<div class="articleCreatedAt"><strong>Date de création: </strong>' + article.createdAt + '</div>' +
+          '<div class="articleUpdatedAt"><strong>Date de modification: </strong>' + article.updatedAt + '</div>' +
+          '<div class="userID"><strong>ID de l\'utilisateur: </strong>' + article.userId + '</div>' +
+          '</article>';
+
+        $("#articles").append(articleHTML);
+      });
+    },
+    error: function() {
+      $('#articles').text("Erreur lors du chargement des articles");
+    }
+  });
+  });
+  });
+//========= Users ==========
+  //Suppression 
+  $("#removeuser").click(function(){
+    var inputA = $("<input>", {
+      type: 'number',
+      id: 'idU',
+      placeholder: 'Id of user'
+    });
+
+    var btn = $("<button>", {
+      type: 'submit',
+      id: 'data2',
+      text: 'delete'
+    });
+
+    $("#ApplyModification2").append(inputA);
+    $("#ApplyModification2").append(btn);
+
+    $("#data2").click(function(){
+      var delURL = "http://localhost:3000/users/" + $("#idU").val();
+      $.ajax({
+        url: delURL,
+        method: "DELETE",
+        success: function(){
+          console.log('done');
+          location.reload();
+        },
+        error: function(){
+          alert('error !');
+        }
+      });
+    });
+  });
+    
+//Insertion 
+    $("#adduser").click(function() {
+  var nom_u = $("<input>", {
+    type: 'text',
+    id: 'nameU',
+    placeholder: 'Username',
+  });
+  var email_u = $("<input>", {
+    type: 'email',
+    id: 'emailU',
+    placeholder: 'user email',
+  });
+  var password_u = $("<input>", {
+    type: 'password',
+    id: 'passwsU',
+    placeholder: 'password',
+  });
+  var role_u = $("<select>", {
+    name: "role",
+    id: "role"
+  }).append(
+    $("<option>", {
+      value: "AUTHOR",
+      text: "AUTHOR"
+    }),
+    $("<option>", {
+      value: "ADMIN",
+      text: "ADMIN"
+    })
+  );
+  var btn_u = $("<button>", {
+    type: 'submit',
+    id: 'dataU',
+    text: 'add'
+  });
+  var user = {
+    nom: nom_u.val(),
+    email: email_u.val(),
+    password: password_u.val(),
+    role: role_u.val()
+  };
+  $("#ApplyModification2").append(nom_u);
+  $("#ApplyModification2").append(email_u);
+  $("#ApplyModification2").append(password_u);
+  $("#ApplyModification2").append(role_u);
+  $("#ApplyModification2").append(btn_u);
+
+  $("#dataU").click(function() {
+    user = {
+      nom: nom_u.val(),
+      email: email_u.val(),
+      password: password_u.val(),
+      role: role_u.val()
+    };
+
+    $.ajax({
+      url: "http://localhost:3000/users",
+      type: 'POST',
+      contentType: "application/json",
+      data: JSON.stringify(user),
+      success: function(response) {
+        console.log("User added successfully:", response);
+        location.reload();
+      },
+      error: function(xhr, status, error) {
+        console.error("Error while adding the user:", error);
+      }
+    });
+  });
+});
+ 
+//Modification 
+    $("#edituser").click(function() {
+    var id_u = $("<input>", {
+    type: 'number',
+    id: 'idU',
+    placeholder: 'id of user',
+  });
+  var nom_u = $("<input>", {
+    type: 'text',
+    id: 'nameU',
+    placeholder: 'Username',
+  });
+  var email_u = $("<input>", {
+    type: 'email',
+    id: 'emailU',
+    placeholder: 'user email',
+  });
+  var password_u = $("<input>", {
+    type: 'password',
+    id: 'passwsU',
+    placeholder: 'password',
+  });
+  var role_u = $("<select>", {
+    name: "role",
+    id: "role"
+  }).append(
+    $("<option>", {
+      value: "AUTHOR",
+      text: "AUTHOR"
+    }),
+    $("<option>", {
+      value: "ADMIN",
+      text: "ADMIN"
+    })
+  );
+  var btn_u = $("<button>", {
+    type: 'submit',
+    id: 'dataU',
+    text: 'add'
+  });
+  var user = {
+    nom: nom_u.val(),
+    email: email_u.val(),
+    password: password_u.val(),
+    role: role_u.val()
+  };
+  $("#ApplyModification2").append(id_u);
+  $("#ApplyModification2").append(nom_u);
+  $("#ApplyModification2").append(email_u);
+  $("#ApplyModification2").append(password_u);
+  $("#ApplyModification2").append(role_u);
+  $("#ApplyModification2").append(btn_u);
+
+  $("#dataU").click(function() {
+    user = {
+      nom: nom_u.val(),
+      email: email_u.val(),
+      password: password_u.val(),
+      role: role_u.val()
+    };
+
+    $.ajax({
+      url: "http://localhost:3000/users/"+id_u.val(),
+      type: 'PATCH',
+      contentType: "application/json",
+      data: JSON.stringify(user),
+      success: function(response) {
+        console.log("User added successfully:", response);
+        location.reload();
+      },
+      error: function(xhr, status, error) {
+        console.error("Error while adding the user:", error);
+      }
+    });
+  });
+});
+//Recherche
+$("#searchuser").click(function(){
+  var inputA = $("<input>", {
+    type: 'number',
+    id: 'idU',
+    placeholder: 'Id of user'
+  });
+
+  var btn = $("<button>", {
+    type: 'submit',
+    id: 'data2',
+    text: 'search'
+  });
+
+  $("#ApplyModification2").append(inputA);
+  $("#ApplyModification2").append(btn);
+
+  $("#data2").click(function(){
+    var searchURL = "http://localhost:3000/users/" + $("#idU").val();
+    $.ajax({
+      url: searchURL,
+      method: "GET",
+      success: function(response){
+        $("#users").empty();
+        var userHTML = '<article>' +
+          '<div class="userId"><strong> L\'id de l\'utilisateur : </strong>' + response.id + '</div>' +
+          '<div class="userName"><strong> Nom :</strong>' + response.nom + '</div>' +
+          '<div class="userEmail"><strong> Email : </strong>' + response.email + '</div>' +
+          '<div class="userPassword"><strong> Password </strong>' + response.password + '</div>' +
+          '<div class="userRole"><strong> Role :</strong>' + response.role + '</div>' +
+          '</article>';
+
+        $("#users").append(userHTML);
+      },
+      error: function(){
+        alert('error !');
+      }
+    });
+  });
+});
+
+
+//Affichage
+$(document).ready(function() {
+  $("#userCount").click(function() {
+    $("#articles").hide();
+    $("#comments").hide();
+    $("#categories").hide();
+    $("#users").show();
+    $("#ApplyModification2").show();
+
+    var userURL = "http://localhost:3000/users/?take=" + nbr_users + "&skip=0";
+    $.ajax({
+      url: userURL,
+      method: 'GET',
+      success: function(data) {
+        // $("#users").empty(); // Efface les utilisateurs existants
+
+        data.forEach(function(user) {
+          var userHTML = '<article>' +
+            '<div class="userId"><strong> L\'id de l\'utilisateur : </strong>' + user.id + '</div>' +
+            '<div class="userName"><strong> Nom :</strong>' + user.nom + '</div>' +
+            '<div class="userEmail"><strong> Email : </strong>' + user.email + '</div>' +
+            '<div class="userPassword"><strong> Password </strong>' + user.password + '</div>' +
+            '<div class="userRole"><strong> Role :</strong>' + user.role + '</div>' +
+            '</article>';
+
+          $("#users").append(userHTML);
+        });
+      },
+      error: function() {
+        $('#users').text("Erreur lors du chargement des utilisateurs");
+      }
+    });
+  });
+});
+//========= Comments ==========
+//Suppression 
+  $("#removecomment").click(function(){
+    var inputA = $("<input>", {
+      type: 'number',
+      id: 'idC',
+      placeholder: 'Id of comment'
+    });
+
+    var btn = $("<button>", {
+      type: 'submit',
+      id: 'data3',
+      text: 'delete'
+    });
+
+    $("#ApplyModification3").append(inputA);
+    $("#ApplyModification3").append(btn);
+
+    $("#data3").click(function(){
+      var delURL = "http://localhost:3000/commentaires/" + $("#idC").val();
+      $.ajax({
+        url: delURL,
+        method: "DELETE",
+        success: function(){
+          console.log('done');
+          location.reload();
+        },
+        error: function(){
+          alert('error !');
+        }
+      });
+    });
+  });
+
+//Insertion
+    $("#addcomment").click(function() {
+  var email_c = $("<input>", {
+    type: 'email',
+    id: 'emailC',
+    placeholder: 'user email',
+  });
+  var content_u = $("<input>", {
+    type: 'text',
+    id: 'contentC',
+    placeholder: 'Votre Commentaire',
+  });
+  var a_id = $("<input>", {
+    type: 'number',
+    id: 'aIdC',
+    placeholder: 'Article Id',
+  });
+  var u_id = $("<input>", {
+    type: 'number',
+    id: 'uIdC',
+    placeholder: 'Author Id',
+  });
+
+  var btn_u = $("<button>", {
+    type: 'submit',
+    id: 'dataU',
+    text: 'add'
+  });
+
+  var comment = {
+    email: '',
+    contenu: '',
+    articleId: 0,
+    userId: 0
+  };
+
+  $("#ApplyModification3").append(email_c);
+  $("#ApplyModification3").append(content_u);
+  $("#ApplyModification3").append(a_id);
+  $("#ApplyModification3").append(u_id);
+  $("#ApplyModification3").append(btn_u);
+
+  $("#dataU").click(function() {
+    comment = {
+      email: email_c.val(),
+      contenu: content_u.val(),
+      articleId: parseInt(a_id.val()),
+      userId: parseInt(u_id.val())
+    };
+
+    $.ajax({
+      url: "http://localhost:3000/commentaires/",
+      type: 'POST',
+      contentType: "application/json",
+      data: JSON.stringify(comment),
+      success: function(response) {
+        console.log("Comment added successfully:", response);
+        location.reload();
+      },
+      error: function(xhr, status, error) {
+        console.error("Error while adding the comment:", error);
+      }
+    });
+  });
+});
+
+//Modification
+    $("#editcomment").click(function() {
+    var id_c = $("<input>", {
+    type: 'number',
+    id: 'idC',
+    placeholder: 'id of comment',
+  });
+  var email_c = $("<input>", {
+    type: 'email',
+    id: 'emailC',
+    placeholder: 'user email',
+  });
+  var content_u = $("<input>", {
+    type: 'text',
+    id: 'contentC',
+    placeholder: 'Votre Commentaire',
+  });
+  var a_id = $("<input>", {
+    type: 'number',
+    id: 'aIdC',
+    placeholder: 'Article Id',
+  });
+  var u_id = $("<input>", {
+    type: 'number',
+    id: 'uIdC',
+    placeholder: 'Author Id',
+  });
+
+  var btn_u = $("<button>", {
+    type: 'submit',
+    id: 'dataU',
+    text: 'Edit'
+  });
+  var comment = {
+    id : 0,
+    email: '',
+    contenu: '',
+    articleId: 0,
+    userId: 0
+  };
+  $("#ApplyModification3").append(id_c);
+  $("#ApplyModification3").append(email_c);
+  $("#ApplyModification3").append(content_u);
+  $("#ApplyModification3").append(a_id);
+  $("#ApplyModification3").append(u_id);
+  $("#ApplyModification3").append(btn_u);
+
+  $("#dataU").click(function() {
+    comment = {
+    email: email_c.val(),
+      contenu: content_u.val(),
+      articleId: parseInt(a_id.val()),
+      userId: parseInt(u_id.val())
+    };
+
+    $.ajax({
+      url: "http://localhost:3000/commentaires/"+id_c.val(),
+      type: 'PATCH',
+      contentType: "application/json",
+      data: JSON.stringify(comment),
+      success: function(response) {
+        console.log("Comment added successfully:", response);
+        location.reload();
+      },
+      error: function(xhr, status, error) {
+        console.error("Error while adding the comment:", error);
+      }
+    });
+  });
+});
+
+//Recherche
+$("#searchcomment").click(function(){
+  var inputA = $("<input>", {
+    type: 'number',
+    id: 'idC',
+    placeholder: 'Id of comment'
+  });
+
+  var btn = $("<button>", {
+    type: 'submit',
+    id: 'data3',
+    text: 'search'
+  });
+
+  $("#ApplyModification3").append(inputA);
+  $("#ApplyModification3").append(btn);
+
+  $("#data3").click(function(){
+    var searchURL = "http://localhost:3000/commentaires/" + $("#idC").val();
+    $.ajax({
+      url: searchURL,
+      method: "GET",
+      success: function(response){
+        $("#comments").empty();
+        var commentHTML = '<article>' +
+                          '<div class="commentId"> L\'id du commentaire :</strong>' + response.id + '</div>' +
+                          '<div class="commentEmail"><strong>Email :</strong>' + response.email + '</div>' +
+                          '<div class="commentContent"><strong> Commentaire :</strong>' + response.contenu + '</div>' +
+                          '<div class="commentArticleId"><strong> Id de l\'article : </strong>' + response.articleId + '</div>' +
+                          '<div class="commentUserId"> <strong>L\'utilisateur Id :</strong>' + response.userId + '</div>' +
+                          '</article>';
+
+        $("#comments").append(commentHTML);
+      },
+      error: function(){
+        alert('error !');
+      }
+    });
+  });
+});
+
+//affichage
+    $(document).ready(function() {
+      $("#commentCount").click(function() {
+        $("#articles").hide();
+        $("#users").hide();
+        $("#categories").hide();
+        $("#comments").show();
+        $("#ApplyModification3").show();
+
+        
+      var commentURL = "http://localhost:3000/commentaires/?take=" + nbr_comments + "&skip=0";
+      $.ajax({
+    url: commentURL,
+    method: 'GET',
+    success: function(data) {
+//   $("#comments").empty(); // Efface les utilisateurs existants
+
+  data.forEach(function(comment) {
+    var userHTML = '<article>' +
+        '<div class="commentId"> L\'id de l\'utilisateur :</strong>' + comment.id + '</div>' +
+      '<div class="commentEmail"><strong>Email :</strong>' + comment.email + '</div>' +
+      '<div class="commentContent"><strong> Commentaire :</strong>' + comment.contenu + '</div>' +
+      '<div class="commentArticleId"><strong> Id de l\'articles : </strong>' + comment.articleId + '</div>' +
+      '<div class="commentUserId"> <strong>L\'utilisateur Id :</strong>' + comment.userId + '</div>' +
+      '</article>';
+
+    $("#comments").append(userHTML);
+  });
+},
+
+    error: function() {
+      $('#comments').text("Erreur lors du chargement des utilisateurs");
+    }
+  });
+  });
+  });
+//========== categories ==========
+//Affichage
+$(document).ready(function() {
+  $("#categoryCount").click(function() {
+    $("#articles").hide();
+    $("#users").hide();
+    $("#comments").hide();
+    $("#categories").show();
+    $("#ApplyModification4").show();
+    
+    var categoryURL = "http://localhost:3000/categories/?take=" + nbr_categories + "&skip=0";
+    
+    $.ajax({
+      url: categoryURL,
+      method: 'GET',
+      success: function(data) {
+        // $("#categories").empty(); // Efface les catégories existantes
+
+        data.forEach(function(category) {
+          var categoryHTML = '<article>' +
+                              '<div class="categoryId"><strong>L\'id du catégorie :</strong>' + category.id + '</div>' +
+                              '<div class="categoryName"><strong>Nom :</strong>' + category.nom + '</div>' +
+                              '</article>';
+
+          $("#categories").append(categoryHTML);
+        });
+      },
+      error: function() {
+        $('#categories').text("Erreur lors du chargement des catégories");
+      }
+    });
+  });
+});
+
+//Suppression
+$("#removecategory").click(function(){
+    var inputA = $("<input>", {
+      type: 'number',
+      id: 'idCtg',
+      placeholder: 'Id of category'
+    });
+
+    var btn = $("<button>", {
+      type: 'submit',
+      id: 'data4',
+      text: 'delete'
+    });
+
+    $("#ApplyModification4").append(inputA);
+    $("#ApplyModification4").append(btn);
+
+    $("#data4").click(function(){
+      var delURL = "http://localhost:3000/categories/" + $("#idCtg").val();
+      $.ajax({
+        url: delURL,
+        method: "DELETE",
+        success: function(){
+          console.log('done');
+          location.reload();
+        },
+        error: function(){
+          alert('error !');
+        }
+      });
+    });
+  });
+
+//Insertion 
+$("#addcategory").click(function() {
+  var nom_c = $("<input>", {
+    type: 'text',
+    id: 'nomCtg',
+    placeholder: 'Nom de categorie',
+  });
+  var btn_u = $("<button>", {
+    type: 'submit',
+    id: 'data4',
+    text: 'add'
+  });
+
+  var category = {
+    nom_c: ''
+  };
+
+  $("#ApplyModification4").append(nom_c); // Utilisez l'ID correct "#ApplyModification4" au lieu de la classe ".ApplyModification4"
+  $("#ApplyModification4").append(btn_u); // Utilisez l'ID correct "#ApplyModification4" au lieu de la classe ".ApplyModification4"
+
+  $("#data4").click(function() {
+    category = {
+     nom : nom_c.val()
+    };
+
+    $.ajax({
+      url: "http://localhost:3000/categories/",
+      type: 'POST',
+      contentType: "application/json",
+      data: JSON.stringify(category),
+      success: function(response) {
+        console.log("Category added successfully:", response);
+        location.reload();
+      },
+      error: function(xhr, status, error) {
+        console.error("Error while adding the category:", error);
+      }
+    });
+  });
+});
+
+//Modification
+$("#editcategory").click(function() {
+    var id_ctg = $("<input>", {
+    type: 'number',
+    id: 'idCtg',
+    placeholder: 'id of category',
+  });
+  var nom_c = $("<input>", {
+    type: 'text',
+    id: 'nomCtg',
+    placeholder: 'Nom de categorie',
+  });
+  var btn_u = $("<button>", {
+    type: 'submit',
+    id: 'data4',
+    text: 'Edit'
+  });
+  var category = {
+    id : 0,
+    nom: ''
+  };
+  $("#ApplyModification4").append(id_ctg);
+  $("#ApplyModification4").append(nom_c);
+  $("#ApplyModification4").append(btn_u);
+
+  $("#data4").click(function() {
+    category = {
+      id : id_ctg,
+      nom: nom_c.val()
+    };
+
+    $.ajax({
+      url: "http://localhost:3000/categories/"+id_ctg.val(),
+      type: 'PATCH',
+      contentType: "application/json",
+      data: JSON.stringify(category),
+      success: function(response) {
+        console.log("Category added successfully:", response);
+        location.reload();
+      },
+      error: function(xhr, status, error) {
+        console.error("Error while adding the category:", error);
+      }
+    });
+  });
+});
+
+//Recherche
+$("#searchcategory").click(function(){
+  var inputA = $("<input>", {
+    type: 'number',
+    id: 'idCtg',
+    placeholder: 'Id of category'
+  });
+
+  var btn = $("<button>", {
+    type: 'submit',
+    id: 'data4',
+    text: 'search'
+  });
+
+  $("#ApplyModification4").append(inputA);
+  $("#ApplyModification4").append(btn);
+
+  $("#data4").click(function(){
+    var searchURL = "http://localhost:3000/categories/" + $("#idCtg").val();
+    $.ajax({
+      url: searchURL,
+      method: "GET",
+      success: function(response){
+        $("#categories").empty();
+        var categoryHTML = '<article>' +
+                          '<div class="categoryId"><strong>L\'id du catégorie :</strong>' + response.id + '</div>' +
+                          '<div class="categoryName"><strong>Nom :</strong>' + response.nom + '</div>' +
+                          '</article>';
+
+        $("#categories").append(categoryHTML);
+      },
+      error: function(){
+        alert('error !');
+      }
+    });
+  });
+});
+
+
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 </body>
 </html>

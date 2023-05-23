@@ -164,7 +164,6 @@ background-color: rgb(214, 55, 55);
 font-size: 26px;
 }
 
-
 .create:active {
 transform: scale(0.9);
 background-color: tomato;
@@ -182,4 +181,55 @@ text-align: start;
 }
 sub{
 float: right;
+}
+
+
+/*  ADMIN  */
+.stat {
+  color: #007bff;
+  margin-bottom: 30px;
+  /* padding: 20px; */
+}
+#page2{
+  padding: 20px;
+}
+#statistics {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.statistic-item {
+  width: 200px;
+  background-color: #f3f170;
+  border-radius: 5px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.statistic-item h3 {
+  color: #007bff;
+  margin-bottom: 10px;
+}
+
+.statistic-item h4 {
+  font-size: 28px;
+  color: #333;
+}
+
+.statistic-item i {
+  font-size: 36px;
+  margin-bottom: 10px;
+}
+.stat_icon{
+  color: rgb(23, 23, 73);
+}
+.statistic-item:hover{
+  width: 220px;
+  cursor: pointer;
+  box-shadow: #070707;
+  box-sizing: border-box;
 }

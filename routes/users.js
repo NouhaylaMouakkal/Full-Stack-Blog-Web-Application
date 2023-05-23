@@ -29,15 +29,11 @@ function addUser(utilisateur){
     data : utilisateur
   });
 }
-function getUserE(email){
-  return prisma.user.findUnique({
-    where : {email: email}
-  })
-}
+
 /* GET users listing. */
 router.get('/', async (req, res) => {
   const { take, skip } = req.query;
-  const users = await prisma.user.findMany({ take: +take || 10, skip: +skip || 0 });
+  const users = await prisma.user.findMany({ take: +take || 2, skip: +skip || 0 });
   res.json(users);
 });
 
@@ -45,9 +41,7 @@ router.get('/:id', async (req, res)=> {
   await getUser(+req.params.id).then((user) => res.json(user));
 });
 
-router.get('/:email', async (req, res)=> {
-  await getUserE(req.params.email).then((user) => res.json(user));
-});
+
 // POST
 router.post('/', async (req, res)=> {
   const user = await addUser(req.body);

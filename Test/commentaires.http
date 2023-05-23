@@ -1,7 +1,7 @@
 ### Get commentaires
 GET http://localhost:3000/commentaires?take=10&skip=5
 ### Get commentaire by id
-GET http://localhost:3000/commentaires/1
+GET http://localhost:3000/commentaires/46
 ### Create new commentaire
 POST http://localhost:3000/commentaires/
 Content-Type: application/json

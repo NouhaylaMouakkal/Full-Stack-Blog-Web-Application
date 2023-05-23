@@ -5,9 +5,7 @@ const router = express.Router();
 
 //_____________________________ Functions _______________________________
 function getArticleById(id){
-    return prisma.article.findUnique({
-        where :{id:+id}
-    })
+    return prisma.article.findUnique({where : {id:+id}})
 }
 function getCommentCount(id){
     return prisma.comment.count({
@@ -36,7 +34,7 @@ function updateArticle(id, upArticle) {
 //_____________________________ GET _______________________________
 router.get('/', async (req, res) => {
     const { take, skip } = req.query;
-    const articles = await prisma.article.findMany({ take: +take || 5, skip: +skip || 0 });
+    const articles = await prisma.article.findMany({ take: +take || 100, skip: +skip || 0 });
     res.json(articles);
 });
 router.get('/:id', async (req, res) => {
@@ -59,24 +57,15 @@ router.get('/:id/commentaires/count', async (req, res) => {
       res.status(500).json({ error: error.message });
     }
   });
-  router.get('/countArticles', async (req, res) => {
-    try {
-      const countAllArticles = await prisma.article.count();
-      res.json({ countAllArticles });
-    } catch (error) {
-      res.status(500).json({ error: error.message });
-    }
-  });
+  // router.get('/countArticles', async (req, res) => {
+  //   try {
+  //     const countAllArticles = await prisma.article.count();
+  //     res.json({ countAllArticles });
+  //   } catch (error) {
+  //     res.status(500).json({ error: error.message });
+  //   }
+  // });
   
-  router.get('/:id/user', async (req, res) => {
-    const { id } = req.params;
-    try {
-      const userArticle = await prisma.article.findMany({where : {userId:+id}});
-      res.json({ userArticle });
-    } catch (error) {
-      res.status(500).json({ error: error.message });
-    }
-  });
 //_____________________________ POST _______________________________
 router.post('/', async (req, res) => {
     const newArticle = req.body;

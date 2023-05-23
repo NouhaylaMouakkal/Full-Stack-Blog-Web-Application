@@ -1,38 +1,7 @@
 ###
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 GET http://localhost:3000/categories?take=5&skip=0
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ### Get category by id
-GET http://localhost:3000/categories/56
+GET http://localhost:3000/categories/52
 
 
 ###

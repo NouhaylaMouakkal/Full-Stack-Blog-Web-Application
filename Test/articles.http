@@ -1,6 +1,6 @@
-GET http://localhost:3000/articles?take=2&skip=0 HTTP/1.1
+GET http://localhost:3000/articles
 ### 
-GET http://localhost:3000/articles/56/user
+GET http://localhost:3000/articles/106
 ### !!
 POST http://localhost:3000/articles
 
@@ -30,4 +30,4 @@ Content-Type: application/json
   "userId": 56
 }
 ### 
-DELETE http://localhost:3000/articles/6
+DELETE http://localhost:3000/articles/1

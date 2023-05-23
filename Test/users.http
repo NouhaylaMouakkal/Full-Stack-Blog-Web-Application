@@ -1,7 +1,7 @@
 ###
-GET http://localhost:3000/users?take=15&skip=0
+GET http://localhost:3000/users?take=2&skip=0
 ###
-GET http://localhost:3000/users/66
+GET http://localhost:3000/users/nouhayla@gmail.com
 ###
 POST http://localhost:3000/users/
 Content-Type: application/json
