@@ -15,6 +15,8 @@ const usersRouter = require('./routes/users');
 const counting = require('./routes/dashboard.js');
 const checkUser = require('./routes/checkin.js');
 const myarticles = require("./routes/myarticles.js");
+const articleComments = require("./routes/ArticleComments.js");
+
 const cors = require('cors');
 // const authRouter = require('./routes/authRouter')
 app.use(logger('dev'));
@@ -30,7 +32,8 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/login',checkUser)
 app.use('/countAll',counting);
-app.use('/myarticles',myarticles)
+app.use('/myarticles',myarticles);
+app.use('/articleComments',articleComments);
 // app.use('/auth',authRouter);
 // ***********************************************************
 

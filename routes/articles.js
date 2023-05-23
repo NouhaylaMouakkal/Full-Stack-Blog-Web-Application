@@ -47,6 +47,7 @@ router.get('/:id', async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 });
+
 //récupérer le nombre de commentaires associés à un article
 router.get('/:id/commentaires/count', async (req, res) => {
     const { id } = req.params;
