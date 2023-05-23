@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+
+</head>
+<style>
+    @import url('https://fonts.googleapis.com/css?family=Roboto');
+
+/* Just the background stuff */
+span.s1 {
+  position: absolute;
+  top: 0;
+  font-size: 15rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #3C4447;
+}
+
+/* My hum... body.. yeah.. */
+body {
+  background-color: #353B3F;
+  font-family: 'Roboto', sans-serif;
+}
+
+/* The card */
+.card_ {
+  position: relative;
+  height: 450px;
+  width: 900px;
+  margin: 50px auto;
+  background-color: #FFF;
+  box-shadow: 10px 10px 93px 0px rgba(0, 0, 0, 0.75);
+}
+
+/* Image on the left side */
+.thumbnail_ {
+  float: left;
+  position: relative;
+  left: 30px;
+  top: -30px;
+  height: 320px;
+  width: 500px;
+  box-shadow: 10px 10px 60px 0px rgba(0, 0, 0, 0.75);
+  overflow: hidden;
+}
+
+img.left {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  height: auto;
+  width: 100%;
+  transform: translate(-50%, -50%);
+}
+
+/* Right side of the card */
+.right {
+  margin-left: 590px;
+  margin-right: 20px;
+}
+
+h1 {
+  padding-top: 15px;
+  font-size: 1.3rem;
+  color: #4B4B4B;
+}
+
+.author_ {
+  background-color: #9ECAFF;
+  height: 30px;
+  width: auto;
+  text-align: center;
+  border-radius: 20px;
+}
+
+
+h2 {
+  padding-top: 8px;
+  margin-right: 6px;
+  text-align: center;
+  font-size: 0.8rem;
+  color: white;
+}
+
+.separator_ {
+  margin-top: 10px;
+  border: 1px solid #C3C3C3;
+}
+
+p {
+  text-align: justify;
+  padding-top: 10px;
+  font-size: 0.95rem;
+  line-height: 150%;
+  color: #4B4B4B;
+}
+
+/* DATE of release */
+h6 {
+  position: absolute;
+  left: 30px;
+  bottom: -55px;
+  font-size: 2rem;
+  color: #C3C3C3;
+}
+/* Floating action button */
+.fab_ {
+  position: absolute;
+  right: 0px;
+  bottom: -40px;
+  box-sizing: border-box;
+  padding-top: 18px;
+  background-color: #1875D0;
+  width: 80px;
+  height: 80px;
+  color: white;
+  text-align: center;
+  border-radius: 50%;
+  box-shadow: 10px 10px 50px 0px rgba(0, 0, 0, 0.75);
+}
+
+.fab_ i {
+  font-size: 35px;
+}
+
+
+
+</style>
+<body>
+<!-- Navbar -->
+<nav class="navbar navbar-dark bg-dark fixed-top">
+    <div class="container-fluid">
+      <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Dark offcanvas</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+          <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Link</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Dropdown
+              </a>
+              <ul class="dropdown-menu dropdown-menu-dark">
+                <li><a class="dropdown-item" href="#">Action</a></li>
+                <li><a class="dropdown-item" href="#">Another action</a></li>
+                <li>
+                  <hr class="dropdown-divider">
+                </li>
+                <li><a class="dropdown-item" href="#">Something else here</a></li>
+              </ul>
+            </li>
+          </ul>
+          <form class="d-flex mt-3" role="search">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-success" type="submit">Search</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+    <div class="fond_" id="articles">
+        <span class="s1"></span>
+      </div>
+      <div class="card_">
+        <div class="thumbnail_">
+          <img class="left" src="" alt="Thumbnail">
+        </div>
+        <div class="right">
+          <h1></h1>
+          <div class="author_">
+            <h2></h2>
+          </div>
+          <div class="separator_"></div>
+          <p></p>
+          <h6></h6>
+        </div><div class="fab_">
+        <i class="fa fa-comments" aria-hidden="true"></i>    
+    </div>
+    </div>
+      
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+      <script>
+         $(document).ready(function() {
+      var articleURL = "http://localhost:3000/articles/";
+      $.ajax({
+    url: articleURL,
+    method: 'GET',
+    success: function(data) {
+      // $("#articles").empty(); // Clear existing articles
+
+      data.forEach(function(article) {
+        var articleHTML = '<article>' +
+            '<div class="fond_">'+
+               '<span class="s1"></span>'+
+             '</div>'+
+            '<div class="card_">'+
+              '<div class="thumbnail_">'+
+            '<img class="left" src='+article.image+' alt="Thumbnail">'+
+        '</div>'+
+        '<div class="right">'+
+          '<h1>'+article.title+'</h1>'+
+          '<div class="author_">'+
+            '<h2>'+article.userId+'</h2>'+
+          '</div>'+
+          '<div class="separator_"></div>'+
+          '<p>'+article.contenu+'</p>'+
+          '<h6>'+article.createdAt+'</h6>'+
+        '</div>'+
+        '<div class="fab_">'+
+        '<i class="fa fa-comments" aria-hidden="true"></i> '  + 
+    '</div>'+
+    '</div>'
+      
+
+        $("#articles").append(articleHTML);
+      });
+    },
+    error: function() {
+      $('#articles').text("Erreur lors du chargement des articles");
+    }
+  });
+  });
+
+    </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>  
+
+</body>
+</html>

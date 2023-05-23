@@ -1,11 +1,12 @@
 $(document).ready(function(){
-  $("div#page2").hide();
+  $("div#login").hide();
+  $("div#signup").hide();
+
 })
 // Display login
 $(document).ready(function() {
   $("a.login").click(function() {
     $("div#signup").hide();
-    $("div#HomePage").hide();
     $("div#login").show();
 
   });
@@ -14,45 +15,30 @@ $(document).ready(function() {
 $(document).ready(function() {
   $("a.signup").click(function() {
     $("div#login").hide();
-    $("div#HomePage").hide();
     $("div#signup").show();
   });
 });
 // Display home
 $(document).ready(function() {
-  $(".logo").click(function() {
+  $(".HomePage").click(function() {
     $("div#login").hide();
     $("div#signup").hide();
   });
 });
-// Switching from signup to login or vice versa
+// Switching from signup to login 
 $(document).ready(function() {
   $("a.Is_exist").click(function() {
     $("div#signup").hide();
     $("div#login").show();
   });
 });
-// Switching from login to signup or vice versa
+// Switching from login to signup 
 $(document).ready(function() {
   $("a.Not_exist").click(function() {
     $("div#login").hide();
     $("div#signup").show();
   });
 });
-//Articles 
-$(document).ready(function(){
-  $("a.contact").click(function(){
-    $("div#page1").hide();
-    $("div#page2").show();
-  })
-})
-//Log out
-$(document).ready(function(){
-  $("i.logout").click(function(){
-    $("div#page2").hide();
-    $("div#page1").show();
-  })
-})
 //sign up
 $(document).ready(function() {
   $("#signup_form").submit(function(event) {
@@ -74,7 +60,7 @@ $(document).ready(function() {
       contentType: "application/json",
       data: JSON.stringify(utilisateur),
       success: function(response) {
-        console.log("Utilisateur ajouté avec succès :", response);
+        alert("Utilisateur ajouté avec succès :", response);
       },
       error: function(xhr, status, error) {
         console.error("Erreur lors de l'ajout de l'utilisateur :", error);
@@ -99,7 +85,7 @@ document.getElementById("login_form").addEventListener("submit", function(event)
         if (data.password === password_lf) {
           // Les informations d'identification sont correctes, redirection vers la page "author.html"
             if(data.role ==="AUTHOR"){
-              window.location.href = "autheur.html";
+              window.location.href = "author.html";
             }
             else if(data.role ==="ADMIN")
               window.location.href="admin.html"
@@ -141,28 +127,4 @@ changecolor.addEventListener("click", () => {
     moonIcon.style.display = "inline-block";
     lightIcon.style.display = "none";
   }
-});
-
-
-// ADMIN SIDE 
-// Utilisez l'URL appropriée pour récupérer les statistiques depuis votre backend
-var statisticsURL = "http://localhost:3000/countAll/";
-    
-$(document).ready(function() {
-    // Effectuer une requête AJAX pour récupérer les statistiques
-    $.ajax({
-        url: statisticsURL,
-        method: "GET",
-        success: function(data) {
-            // Mettre à jour les valeurs affichées avec les données reçues
-            $("#articleCount").html('<h3>Articles</h3><h4 class="display-4"><i class="bi bi-newspaper stat_icon"></i> ' + data.AllArticles + '</h4>');
-            $("#userCount").html('<h3>Users</h3><h4 class="display-4"><i class="bi bi-people stat_icon"></i> ' + data.AllUsers + '</h4>');
-            $("#commentCount").html('<h3>Comments</h3><h4 class="display-4"><i class="bi bi-chat-dots stat_icon"></i> ' + data.AllComments + '</h4>');
-            $("#categoryCount").html('<h3>Categories</h3><h4 class="display-4"><i class="bi bi-grid stat_icon"></i> ' + data.AllCategories + '</h4>');
-        },
-        error: function() {
-            // Gérer les erreurs de récupération des statistiques
-            $("#statistics").text("Erreur lors du chargement des statistiques");
-        }
-    });
 });

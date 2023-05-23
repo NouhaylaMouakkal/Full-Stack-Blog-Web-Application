@@ -296,7 +296,7 @@ float: right;
     url: articleURL,
     method: 'GET',
     success: function(data) {
-      $("#articles").empty(); // Clear existing articles
+      // $("#articles").empty(); // Clear existing articles
 
       data.forEach(function(article) {
         var articleHTML = '<article>' +
@@ -350,7 +350,7 @@ $("#addArticle_db").submit(function(event) {
   });
 // My articles
 $(document).ready(function() {
-  var articleURL = "http://localhost:3000/myarticles/57";
+  var articleURL = "http://localhost:3000/myarticles/111";
   //Affichage
   $.ajax({
     url: articleURL,
