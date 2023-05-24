@@ -1,33 +1,35 @@
 GET http://localhost:3000/articles
 ### 
-GET http://localhost:3000/articles/106
-### !!
+GET http://localhost:3000/articles/206
+### 
 POST http://localhost:3000/articles
-
 Content-Type: application/json
 
 {
-    "title": "Article Test",
-    "contenu": "Ceci est un test",
-    "image": "https://picsum.photos/500/300.jpg?",
-    "createdAt": "2023-05-14T00:00:00.000",
-    "updatedAt": "2023-05-14T00:00:00.000",
-    "published": true,
-    "userId" : 57
-}
-### !!
-PATCH http://localhost:3000/articles/103
-
-Content-Type: application/json
-
-{
-  "title": "Article mis à jour",
-  "contenu": "Nouveau contenu de l'article",
-  "image": "https://loremflickr.com/640/480?lock=1314580215103488",
-  "createdAt": "2020-03-26T17:37:33.386Z",
-  "updatedAt": "2023-05-18T12:05:05.023Z",
+  "title": "Article Test d'ajout",
+  "contenu": "Ceci est un test",
+  "image": "https://picsum.photos/500/300.jpg?",
+  "createdAt": "2023-05-14T00:00:00.000",
+  "updatedAt": "2023-05-14T00:00:00.000",
   "published": true,
-  "userId": 56
+  "categories": [61, 62],
+  "userId": 85
+}
+
+### !!
+PATCH http://localhost:3000/articles/206
+
+Content-Type: application/json
+
+{
+  "title": "Article Test Modif",
+  "contenu": "Ceci est un test de modification de l'article 206",
+  "image": "https://picsum.photos/500/300.jpg?",
+  "createdAt": "2023-05-14T00:00:00.000Z",
+  "updatedAt": "2023-05-14T00:00:00.000Z",
+  "published": true,
+  "categories": [61, 62],
+  "userId": 85
 }
 ### 
 DELETE http://localhost:3000/articles/1

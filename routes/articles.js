@@ -12,25 +12,6 @@ function getCommentCount(id){
         where : {articleId : +id}
     })
 }
-function addArticle(newArticle){
-return prisma.article.create({
-        data: {
-            title: newArticle.title,
-            contenu: newArticle.contenu,
-            published: newArticle.published,
-            author: { connect: { id: newArticle.userId } }
-          }
-})}
-function updateArticle(id, upArticle) {
-    return prisma.article.update({
-      where: { id: +id },
-      data: {
-        title: upArticle.title,
-        contenu: upArticle.contenu,
-        published: upArticle.published
-      }
-    });
-  }
 //_____________________________ GET _______________________________
 router.get('/', async (req, res) => {
     const { take, skip } = req.query;
@@ -58,38 +39,62 @@ router.get('/:id/commentaires/count', async (req, res) => {
       res.status(500).json({ error: error.message });
     }
   });
-  // router.get('/countArticles', async (req, res) => {
-  //   try {
-  //     const countAllArticles = await prisma.article.count();
-  //     res.json({ countAllArticles });
-  //   } catch (error) {
-  //     res.status(500).json({ error: error.message });
-  //   }
-  // });
   
 //_____________________________ POST _______________________________
 router.post('/', async (req, res) => {
-    const newArticle = req.body;
-    try {
-        const article = await addArticle(newArticle);
-        res.json(article);
-      } catch (error) {
-        res.status(500).json({ error: error.message });
-      }
-  });
-//_____________________________ PATCH _______________________________
+  const article_data = req.body;
+  const { categories } = article_data;
 
-router.patch('/:id', async (req, res) => {
-    const { id } = req.params;
-    const updatedArticle = req.body;
-  
-    try {
-      const article = await updateArticle(id,updatedArticle)
-      res.json(article);
-    } catch (error) {
-      res.status(500).json({ error: error.message });
+  try {
+    const user = await prisma.user.findUnique({ where: { id: +article_data.userId } });
+
+    if (!user) {
+      return res.status(400).json({ error: `No user found with id ${article_data.userId}` });
     }
-  });
+
+    const createdAt = new Date(article_data.createdAt);
+    const updatedAt = new Date(article_data.updatedAt);
+
+    const article = await prisma.article.create({
+      data: {
+        title: article_data.title,
+        contenu: article_data.contenu,
+        image: article_data.image,
+        createdAt: createdAt,
+        updatedAt: updatedAt,
+        published: article_data.published,
+        categories: {
+          connect: categories.map(id => ({ id })),
+        },
+        userId: article_data.userId
+      },
+    });
+
+    res.json(article);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+//_____________________________ PATCH _______________________________
+router.patch('/:id', async (req, res) => {
+  const { id } = req.params;
+  const updatedArticle = req.body;
+
+  try {
+      const article = await prisma.article.update({
+          where: { id: +id },
+          data: updatedArticle,
+      });
+      res.json(article);
+  } catch (error) {
+      res.status(500).json({ error: error.message });
+  }
+});
+
+
+
+
 //_____________________________ DELETE _______________________________
 router.delete('/:id', async (req, res) => {
     const { id } = req.params;

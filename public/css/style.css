@@ -12,6 +12,14 @@ html{
     font: normal 16px sans-serif;
     color: #555;
 }
+body.dark , section.dark{
+  background-color: #222;
+  color: #fff;
+}
+body.light , section.light{
+  background-color: #fff;
+  color: #222;
+}
 ul, nav{
     list-style: none;
 }
@@ -40,7 +48,6 @@ a.btn{
     color: white
 }
 
-
 section{
     display: -webkit-box;
     display: -ms-flexbox;
@@ -55,10 +62,13 @@ section{
     padding: 100px;
 }
 
+#login_btn,#signup_btn{
+flex-wrap: wrap;
+display: inline-block;
+}
 /*
 Header Configurations
 */
-
 header{
     position: absolute;
     top: 0;
@@ -204,7 +214,6 @@ Cover and Image Animation configuration
     }
 }
 
-
 .grid{
     width: 100%;
     display: -webkit-box;
@@ -225,8 +234,6 @@ hr{
     margin-bottom: 50px;
 }
 
-
-
 @media (max-width: 800px){
 
 	.hero{
@@ -246,11 +253,8 @@ hr{
 
 }
 
-
 /*
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
 Section Configurations
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 */
 section h3.title{
     text-transform: capitalize;
@@ -258,8 +262,6 @@ section h3.title{
     margin-bottom: 30px;
     text-align: center;
 }
-
-
 .destinations .grid li{
     height: 350px;
     padding: 20px;
@@ -267,26 +269,19 @@ section h3.title{
     background-size: cover;
     background-position: center;
 }
-
 .destinations .grid li.small{
     -ms-flex-preferred-size: 30%;
         flex-basis: 30%;
 }
-
 .destnations .grid li.large{
     -ms-flex-preferred-size: 70%;
         flex-basis: 70%;
 }
 
 
-
-
-
-
-
-/*---------------------
+/*
  	Contact Section
----------------------*/
+*/
 
 .contact{
 	background-color: #f7f7f7;
@@ -323,7 +318,6 @@ section h3.title{
 	padding: 18px 42px;
 }
 
-
 @media (max-width: 800px){
 
 	.contact form input{
@@ -334,12 +328,9 @@ section h3.title{
 
 }
 
-
-
-
-/*-------------
+/*
  	Footer
--------------*/
+*/
 
 footer{
 	display: -webkit-box;
@@ -693,7 +684,6 @@ input::placeholder {
 .user_options-forms.bounceRight {
   animation: bounceRight 1s forwards;
 }
-
 /**
  * Responsive 990px
  */
@@ -721,5 +711,4 @@ input::placeholder {
   }
 }
 
-    
-    
+/*============================ AUTHOR ============================================*/
