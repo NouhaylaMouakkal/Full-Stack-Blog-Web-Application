@@ -78,12 +78,9 @@ $(document).ready(function() {
 // Login
 document.getElementById("login_form").addEventListener("submit", function(event) {
   event.preventDefault(); // Empêche la soumission du formulaire
-
   // Récupération des valeurs des champs du formulaire
   const email_lf = document.querySelector("input[name='email']").value;
   const password_lf = document.querySelector("input[name='password']").value;
-
-  // Envoi de la requête POST pour vérifier les informations d'identification
   fetch("http://localhost:3000/login", {
     method: "POST",
     headers: {

@@ -1,12 +1,12 @@
 GET http://localhost:3000/articles
 ### 
-GET http://localhost:3000/articles/206
+GET http://localhost:3000/articles/210
 ### 
 POST http://localhost:3000/articles
 Content-Type: application/json
 
 {
-  "title": "Article Test d'ajout",
+  "title": "Article Test d'ajout pour projet",
   "contenu": "Ceci est un test",
   "image": "https://picsum.photos/500/300.jpg?",
   "createdAt": "2023-05-14T00:00:00.000",
@@ -32,4 +32,4 @@ Content-Type: application/json
   "userId": 85
 }
 ### 
-DELETE http://localhost:3000/articles/1
+DELETE http://localhost:3000/articles/210

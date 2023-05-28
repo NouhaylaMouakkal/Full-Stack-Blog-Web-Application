@@ -16,10 +16,6 @@ const counting = require('./routes/dashboard.js');
 const checkUser = require('./routes/checkin.js');
 const myarticles = require("./routes/myarticles.js");
 const articleComments = require("./routes/ArticleComments.js");
-require('dotenv').config();
-
-const jwt = require("jsonwebtoken");
-
 const cors = require('cors');
 // const authRouter = require('./routes/authRouter')
 app.use(logger('dev'));
@@ -37,13 +33,12 @@ app.use('/login',checkUser)
 app.use('/countAll',counting);
 app.use('/myarticles',myarticles);
 app.use('/articleComments',articleComments);
-// app.use('/auth',authRouter);
 // ***********************************************************
 
-// In your Node.js backend
+require('dotenv').config();
+const jwt = require("jsonwebtoken");
 app.post("/login", async (req, res) => {
   const { email, password } = req.body;
-
   const user = await prisma.user.findUnique({ where: { email: email } });
   const secretKey = process.env.SECRET_KEY;
 
@@ -59,17 +54,6 @@ app.post("/login", async (req, res) => {
     res.status(401).json({ message: "Email ou mot de passe incorrect" });
   }
 });
-
-
-
-
-
-
-
-
-
-
-
 
 
 
