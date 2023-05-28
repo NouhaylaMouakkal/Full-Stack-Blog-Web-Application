@@ -16,6 +16,9 @@ const counting = require('./routes/dashboard.js');
 const checkUser = require('./routes/checkin.js');
 const myarticles = require("./routes/myarticles.js");
 const articleComments = require("./routes/ArticleComments.js");
+require('dotenv').config();
+
+const jwt = require("jsonwebtoken");
 
 const cors = require('cors');
 // const authRouter = require('./routes/authRouter')
@@ -41,19 +44,19 @@ app.use('/articleComments',articleComments);
 app.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
-  // Perform the verification and database lookup using Prisma ORM
-  const user = await prisma.user.findUnique({
-    where: {
-      email: email,
-    },
-  });
+  const user = await prisma.user.findUnique({ where: { email: email } });
+  const secretKey = process.env.SECRET_KEY;
 
-  if (!user || user.password !== password) {
-    // User not found or password doesn't match
-    res.status(401).json({ error: "Invalid credentials" });
+  if (user && user.password === password) {
+    // Informations d'identification valides
+    const token = jwt.sign({ email, role: "AUTHOR" }, secretKey);
+    const role = user.role;
+    const id =  user.id;
+
+    res.json({ token, role , id});
   } else {
-    // User found and password matches
-    res.json({ message: "Login successful" });
+    // Informations d'identification invalides
+    res.status(401).json({ message: "Email ou mot de passe incorrect" });
   }
 });
 

@@ -11,19 +11,16 @@
             background-color: #f8f9fa;
             padding: 20px;
         }
-
         .stat {
             color: #007bff;
             margin-bottom: 30px;
         }
-
         #statistics {
             display: flex;
             flex-wrap: wrap;
             justify-content: space-between;
             margin-top: 20px;
         }
-
         .statistic-item {
             width: 200px;
             background-color: #fff;
@@ -33,22 +30,18 @@
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             text-align: center;
         }
-
         .statistic-item h3 {
             color: #007bff;
             margin-bottom: 10px;
         }
-
         .statistic-item h4 {
             font-size: 28px;
             color: #333;
         }
-
         .statistic-item i {
             font-size: 36px;
             margin-bottom: 10px;
         }
-
     .statistic-item:hover{
   width: 220px;
   cursor: pointer;
@@ -117,9 +110,8 @@
         <div class="statistic-item" id="categoryCount">Chargement du nombre de catégories...</div>
     </div>
     <!-- Articles  -->
-    
-        <div id="articles">
-  <div id="ApplyModification1">
+    <div id="articles">
+    <div id="ApplyModification1">
         <i class="bi bi-file-earmark-plus-fill" id="addArticle"></i>
         <i class="bi bi-pencil" id="editArticle"></i>
         <i class="bi bi-trash" id="removeArticle"></i>
@@ -146,8 +138,6 @@
 
         </div>
     </div>
-    
-
     <!-- Categories -->
     <div id="categories">
         <div id="ApplyModification4">
@@ -174,7 +164,7 @@ $(document).ready(function(){
     $("#ApplyModification4").hide();
 })
     // statistics
-        $(document).ready(function() {
+    $(document).ready(function() {
             var statisticsURL = "http://localhost:3000/countAll/";
             // Effectuer une requête AJAX pour récupérer les statistiques
             $.ajax({
@@ -198,6 +188,107 @@ $(document).ready(function(){
             });
         });
 // ========== Articles ==========
+//Insertion 
+$("#addarticle").click(function() {
+  var title_a = $("<input>", {
+    type: 'text',
+    id: 'titre',
+    placeholder: 'Article Title',
+  });
+  var content = $("<input>", {
+    type: 'text',
+    id: 'content',
+    placeholder: 'Article Body',
+  });
+  var image_a = $("<input>", {
+    type: 'file',
+    accept: "image/*",
+    id: 'img'
+  });
+  var createdAt = new Date();
+  var updatedAt = new Date();
+  var publish = $("<select>", {
+    name: "publier",
+    id: "post"
+  }).append(
+    $("<option>", {
+      value: "True",
+      text: "True"
+    }),
+    $("<option>", {
+      value: "False",
+      text: "False"
+    })
+  );
+
+  var categories = $("<select>", {
+    name: "role",
+    id: "role"
+  });
+
+  $.ajax({
+    url: "http://localhost:3000/categories/?take=" + nbr_categories + "&skip=0",
+    method: 'GET',
+    success: function(data) {
+      data.forEach(function(category) {
+        var categoryHTML = $("<option>", {
+          value: category.nom,
+          text: category.nom
+        });
+        categories.append(categoryHTML);
+      });
+    },
+    error: function() {
+      $('#categories').text("Erreur lors du chargement des catégories");
+    }
+  });
+
+  var userId = $("<input>", {
+    type: 'number',
+    id: 'uid',
+    placeholder: 'UserId',
+  });
+  var btn_u = $("<button>", {
+    type: 'submit',
+    id: 'dataU',
+    text: 'add'
+  });
+
+  var article = {
+    title: title_a.val(),
+    contenu: content.val(),
+    image: image_a.val(),
+    createdAt: createdAt,
+    updatedAt: updatedAt,
+    published: publish.val(),
+    categories: categories.val(),
+    userId: userId.val()
+  };
+
+  $("#ApplyModification1").append(title_a);
+  $("#ApplyModification1").append(content);
+  $("#ApplyModification1").append(image_a);
+  $("#ApplyModification1").append(createdAt);
+  $("#ApplyModification1").append(updatedAt);
+  $("#ApplyModification1").append(publish);
+  $("#ApplyModification1").append(categories);
+  $("#ApplyModification1").append(userId);
+  $("#ApplyModification1").append(btn_u);
+
+  $.ajax({
+    url: "http://localhost:3000/users",
+    type: 'POST',
+    contentType: "application/json",
+    data: JSON.stringify(article),
+    success: function(response) {
+      console.log("Article added successfully:", response);
+      location.reload();
+    },
+    error: function(xhr, status, error) {
+      console.error("Error while adding the article:", error);
+    }
+  });
+});
 //Suppression
     $(document).ready(function(){
   $("#removeArticle").click(function(){
@@ -232,7 +323,6 @@ $(document).ready(function(){
     });
   });
 });
-
 //Recherche 
 $("#searcharticle").click(function(){
   var inputA = $("<input>", {
@@ -408,6 +498,7 @@ $("#searcharticle").click(function(){
       contentType: "application/json",
       data: JSON.stringify(user),
       success: function(response) {
+        alert(response.id);
         console.log("User added successfully:", response);
         location.reload();
       },
@@ -659,6 +750,7 @@ $(document).ready(function() {
       contentType: "application/json",
       data: JSON.stringify(comment),
       success: function(response) {
+        alert(response.id);
         console.log("Comment added successfully:", response);
         location.reload();
       },
@@ -915,6 +1007,7 @@ $("#addcategory").click(function() {
       contentType: "application/json",
       data: JSON.stringify(category),
       success: function(response) {
+        alert(response.id);
         console.log("Category added successfully:", response);
         location.reload();
       },
@@ -1009,8 +1102,6 @@ $("#searchcategory").click(function(){
     });
   });
 });
-
-
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 </body>

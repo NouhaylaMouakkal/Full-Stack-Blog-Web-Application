@@ -657,3 +657,52 @@ margin-bottom: 15px;
 color: #888;
 margin-bottom: 5px;
 }
+
+
+
+/*  ADD ARTICLE  */
+orm{
+  width: fit-content;
+  margin: auto;
+}
+
+
+
+.create {
+  all: unset;
+  background-color: rgb(255, 62, 62);
+  color: #fff;
+  margin: 28px;
+  padding: 3px 10px;
+  border-radius: 6px;
+  display: block;
+  font-size: 25px;
+  float: right;
+}
+
+
+.create:hover {
+  background-color: rgb(214, 55, 55);
+  font-size: 26px;
+}
+
+
+.create:active {
+  transform: scale(0.9);
+  background-color: tomato;
+}
+/* Center a div  */
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Adjust as needed */
+}
+
+.center {
+  text-align: start;
+}
+sub{
+    float: right;
+}
+
