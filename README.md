@@ -53,6 +53,6 @@ nodemon app.js
 
 Assurez-vous que le serveur est correctement lancé et accédez à l'application via votre navigateur.
 
-N'hésitez pas à contribuer et à améliorer ce projet en créant des pull requests. Nous sommes ouverts à toutes les suggestions et aux retours d'expérience !
+N'hésitez pas à contribuer et à améliorer ce projet en créant des pull requests. Je suis ouvert à toutes les suggestions et aux retours d'expérience !
 
 **Bon développement !**
